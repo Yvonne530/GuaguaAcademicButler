@@ -1,6 +1,5 @@
 package org.example.edumanagementservice.util;
 
-import org.example.edumanagementservice.util.BaseResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -12,6 +11,10 @@ public class ResponseUtil {
 
     public static ResponseEntity<BaseResponse<Void>> ok(String msg) {
         return ResponseEntity.ok(new BaseResponse<>(200, msg, null));
+    }
+
+    public static <T> ResponseEntity<BaseResponse<T>> ok(String msg, T data) {
+        return ResponseEntity.ok(new BaseResponse<>(200, msg, data));
     }
 
     public static <T> ResponseEntity<BaseResponse<T>> created(T data) {

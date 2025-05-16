@@ -1,8 +1,8 @@
 package org.example.edumanagementservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.example.edumanagementservice.model.User;
 import org.example.edumanagementservice.enums.RoleType;
+import org.example.edumanagementservice.model.User;
 import org.example.edumanagementservice.repository.UserRepository;
 import org.example.edumanagementservice.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,11 +19,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(String account, String rawPassword, RoleType role) {
-        User user = User.builder()
-                .account(account)
-                .password(passwordEncoder.encode(rawPassword))
-                .role(role)
-                .build();
+        if (userRepository.existsByUsername(account)) {
+            throw new IllegalArgumentException("账号已存在");
+        }
+
+        User user = new User();
+        user.setUsername(account);
+        user.setPassword(passwordEncoder.encode(rawPassword));
+        user.setRole(role);
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public void updatePassword(String username, String newPassword) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("用户不存在"));
+        user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
 
@@ -34,10 +46,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String account) {
-        userRepository.deleteByAccount(account);
+        User user = userRepository.findByUsername(account)
+                .orElseThrow(() -> new IllegalArgumentException("用户不存在"));
+        userRepository.delete(user);
     }
 
-    // ✅ 新增：支持通过部门查询用户（供 UserController 使用）
     @Override
     public List<User> findByDept(String dept) {
         return userRepository.findByDept(dept);
