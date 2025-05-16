@@ -14,11 +14,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class GradeService {
+
     private final GradeRepository gradeRepository;
     private final CourseRepository courseRepo;
     private final GradeWeightRepository weightRepo;
@@ -33,7 +35,7 @@ public class GradeService {
         Course course = courseRepo.findByIdAndTeacherId(courseId, teacherId)
                 .orElseThrow(() -> new BusinessException(404, "课程不存在或无权操作"));
 
-        // 2. 验证权重总和=100%
+        // 2. 验证权重总和 = 100%
         BigDecimal total = weights.stream()
                 .map(dto -> BigDecimal.valueOf(dto.getWeight()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -41,10 +43,11 @@ public class GradeService {
             throw new BusinessException(400, "权重总和必须等于100%");
         }
 
-        // 3. 更新配置
+        // 3. 删除旧配置并保存新配置
         weightRepo.deleteByCourseId(courseId);
         List<GradeWeight> entities = weights.stream()
-                .map(dto -> new GradeWeight(null, course, dto.getAssessmentType(), dto.getWeight(), teacherId, null))
+                .map(dto -> new GradeWeight(null, course, dto.getItemName(),
+                        BigDecimal.valueOf(dto.getWeight()), teacherId, LocalDateTime.now()))
                 .toList();
         weightRepo.saveAll(entities);
     }
@@ -52,7 +55,7 @@ public class GradeService {
     public List<GradeWeightDTO> getGradeWeights(Long courseId) {
         return weightRepo.findByCourseId(courseId)
                 .stream()
-                .map(w -> new GradeWeightDTO(w.getAssessmentType(), w.getWeight()))
+                .map(w -> new GradeWeightDTO(w.getItemName(), w.getWeight().doubleValue()))
                 .toList();
     }
 
