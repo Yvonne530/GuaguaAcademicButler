@@ -1,13 +1,13 @@
 package org.example.edumanagementservice.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.edumanagementservice.dto.MajorDTO;
 import org.example.edumanagementservice.service.MajorService;
 import org.example.edumanagementservice.util.ResponseUtil;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/majors")
@@ -17,36 +17,36 @@ public class MajorController {
 
     private final MajorService majorService;
 
-    @PostMapping // 创建专业（使用 MajorDTO）
-    public Object createMajor(@RequestBody MajorDTO dto) {
-        return ResponseUtil.success(String.valueOf(majorService.createMajor(dto)));
+    @PostMapping
+    public ResponseEntity<?> createMajor(@Valid @RequestBody MajorDTO dto) {
+        MajorDTO created = majorService.createMajor(dto);
+        return ResponseUtil.created(created);
     }
 
-    @PutMapping("/{id}") // 更新专业（使用 MajorDTO）
-    public Object updateMajor(@PathVariable Long id, @RequestBody MajorDTO dto) {
-        return ResponseUtil.success(String.valueOf(majorService.updateMajor(id, dto)));
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateMajor(@PathVariable Long id, @Valid @RequestBody MajorDTO dto) {
+        MajorDTO updated = majorService.updateMajor(id, dto);
+        return ResponseUtil.ok(updated);
     }
 
-    @DeleteMapping("/{id}") // 删除专业（使用 Long）
-    public Object deleteMajor(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteMajor(@PathVariable Long id) {
         majorService.deleteMajor(id);
-        return ResponseUtil.success("删除成功");
+        return ResponseUtil.ok("删除成功");
     }
 
-    @GetMapping("/{id}") // 获取单个专业信息（使用 Long）
-    public Object getMajor(@PathVariable Long id) {
-        return ResponseUtil.success(String.valueOf(majorService.getMajorById(id)));
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getMajor(@PathVariable Long id) {
+        return ResponseUtil.ok(majorService.getMajorById(id));
     }
 
-    @GetMapping("/department/{departmentId}") // 按院系获取专业列表（使用 Long）
-    public Object getMajorsByDepartment(@PathVariable Long departmentId) {
-        return ResponseUtil.success(majorService.getMajorsByDepartment(departmentId).toString());
+    @GetMapping("/department/{departmentId}")
+    public ResponseEntity<?> getMajorsByDepartment(@PathVariable Long departmentId) {
+        return ResponseUtil.ok(majorService.getMajorsByDepartment(departmentId));
     }
 
-    @GetMapping // 获取所有专业列表（使用 getAllMajors()）
-    public Object listMajors() {
-        List<MajorDTO> majors = majorService.getAllMajors();
-        return ResponseUtil.success(majors.toString());
+    @GetMapping
+    public ResponseEntity<?> listMajors() {
+        return ResponseUtil.ok(majorService.getAllMajors());
     }
 }
-

@@ -48,17 +48,22 @@ public class CourseRequestServiceImpl implements CourseRequestService {
     }
 
     @Override
-    public String getRequestsByStudent(Long studentId) {
+    public List<CourseRequestDTO> getRequestsByStudent(Long studentId) {
         return courseRequestRepository.findByStudentId(studentId).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
+
 
     @Override
     public List<CourseRequestDTO> getPendingRequests() {
         return courseRequestRepository.findByStatus(RequestStatus.PENDING).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
+    }
+    @Override
+    public CourseRequest save(CourseRequest cr) {
+        return courseRequestRepository.save(cr);
     }
 
     private CourseRequestDTO convertToDTO(CourseRequest entity) {

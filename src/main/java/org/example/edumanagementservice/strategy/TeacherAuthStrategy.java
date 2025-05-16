@@ -1,9 +1,9 @@
 package org.example.edumanagementservice.strategy;
 
-import com.edu.management.model.Teacher;
+import org.example.edumanagementservice.model.Teacher;
 import org.example.edumanagementservice.enums.RoleType; // 使用枚举替代字符串
-import com.edu.management.repository.TeacherRepository;
-import com.edu.management.exception.CustomException;
+import org.example.edumanagementservice.repository.TeacherRepository;
+import org.example.edumanagementservice.exception.CustomException;
 import org.example.edumanagementservice.util.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

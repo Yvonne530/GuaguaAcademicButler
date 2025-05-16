@@ -1,6 +1,6 @@
 package org.example.edumanagementservice.repository;
 
-package org.example.edumanagementservice.controller;
+
 
 import org.example.edumanagementservice.dto.PermissionDTO;
 import org.example.edumanagementservice.service.PermissionService;

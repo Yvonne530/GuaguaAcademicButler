@@ -36,4 +36,10 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(String account) {
         userRepository.deleteByAccount(account);
     }
+
+    // ✅ 新增：支持通过部门查询用户（供 UserController 使用）
+    @Override
+    public List<User> findByDept(String dept) {
+        return userRepository.findByDept(dept);
+    }
 }

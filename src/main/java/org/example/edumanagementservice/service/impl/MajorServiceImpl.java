@@ -2,7 +2,7 @@ package org.example.edumanagementservice.service.impl;
 
 
 import org.example.edumanagementservice.dto.MajorDTO;
-import com.edu.management.exception.CustomException;
+import org.example.edumanagementservice.exception.CustomException;
 import org.example.edumanagementservice.model.Department;
 import org.example.edumanagementservice.model.Major;
 import org.example.edumanagementservice.repository.DepartmentRepository;

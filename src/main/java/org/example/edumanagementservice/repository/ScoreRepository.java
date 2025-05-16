@@ -1,14 +1,10 @@
 package org.example.edumanagementservice.repository;
 
-public interface StudentScoreView {
-    Integer getStudentId();
-    String getStudentName();
-    Integer getCourseId();
-    String getCourseName();
-    Double getScore();
-    String getGrade();
-    String getTeacherName();
-}
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ViewScoreRepository extends JpaRepository<StudentScoreEntity, Integer> {

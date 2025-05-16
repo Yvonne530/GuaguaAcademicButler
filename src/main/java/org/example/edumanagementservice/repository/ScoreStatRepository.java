@@ -1,4 +1,15 @@
 package org.example.edumanagementservice.repository;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.StoredProcedureQuery;
+import org.springframework.stereotype.Repository;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 @Repository
 public class ScoreStatRepository {
 

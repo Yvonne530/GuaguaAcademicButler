@@ -4,17 +4,18 @@ import lombok.RequiredArgsConstructor;
 import org.example.edumanagementservice.dto.GradeDTO;
 import org.example.edumanagementservice.dto.GradeWeightDTO;
 import org.example.edumanagementservice.exception.BusinessException;
+import org.example.edumanagementservice.model.Course;
 import org.example.edumanagementservice.model.Grade;
 import org.example.edumanagementservice.model.GradeWeight;
+import org.example.edumanagementservice.repository.CourseRepository;
 import org.example.edumanagementservice.repository.GradeRepository;
+import org.example.edumanagementservice.repository.GradeWeightRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
 @Service
 @RequiredArgsConstructor
 public class GradeService {

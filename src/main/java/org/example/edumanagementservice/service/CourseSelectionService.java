@@ -15,38 +15,26 @@ import java.util.concurrent.TimeUnit;
 @Service
 @RequiredArgsConstructor
 public class CourseSelectionService {
+
     private final CourseSelectionRepository repository;
+    private final DistributedLockService lockService;
 
-    public void selectCourse(String studentId, CourseSelectionDTO dto) {
-        if (repository.existsByStudentIdAndCourseCode(studentId, dto.getCourseCode())) {
-            throw new IllegalArgumentException("课程已选择");
-        }
-        CourseSelection cs = new CourseSelection(null, studentId, dto.getCourseCode(), dto.getSemester());
-        repository.save(cs);
-    }
-    @Service
-    @RequiredArgsConstructor
-    public class CourseSelectionService {
-        private final CourseSelectionRepository repository;
-        private final DistributedLockService lockService;
-
-        @Transactional
-        public void selectCourseWithLock(String studentId, CourseSelectionDTO dto) {
-            String lockKey = "selection:" + dto.getCourseCode();
-            try {
-                if (!lockService.tryLock(lockKey, 5, 10, TimeUnit.SECONDS)) {
-                    throw new BusyOperationException("选课人数过多，请稍后重试");
-                }
-
-                if (repository.existsByStudentIdAndCourseCode(studentId, dto.getCourseCode())) {
-                    throw new IllegalArgumentException("课程已选择");
-                }
-
-                CourseSelection cs = new CourseSelection(null, studentId, dto.getCourseCode(), dto.getSemester());
-                repository.save(cs);
-            } finally {
-                lockService.clone(lockKey);
+    @Transactional
+    public void selectCourseWithLock(String studentId, CourseSelectionDTO dto) {
+        String lockKey = "selection:" + dto.getCourseCode();
+        try {
+            if (!lockService.tryLock(lockKey, 5, 10, TimeUnit.SECONDS)) {
+                throw new BusyOperationException("选课人数过多，请稍后重试");
             }
+
+            if (repository.existsByStudentIdAndCourseCode(studentId, dto.getCourseCode())) {
+                throw new IllegalArgumentException("课程已选择");
+            }
+
+            CourseSelection cs = new CourseSelection(null, studentId, dto.getCourseCode(), dto.getSemester());
+            repository.save(cs);
+        } finally {
+            lockService.unlock(lockKey); // ✅ 正确方法，释放锁
         }
     }
 

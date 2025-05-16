@@ -1,16 +1,18 @@
 package org.example.edumanagementservice.factory;
 
 
-import com.edu.management.service.factory.AuthStrategyFactory;
-import org.example.edumanagementservice.strategy.AuthStrategy;
-import com.edu.management.util.ResponseUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.example.edumanagementservice.strategy.AuthStrategy;
+import org.example.edumanagementservice.util.ResponseUtil;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -25,7 +27,7 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         AuthStrategy strategy = authStrategyFactory.getStrategy(request.getUserType());
         String token = strategy.login(request.getUsername(), request.getPassword());
-        return ResponseEntity.ok(ResponseUtil.success("登录成功", token));
+        return ResponseUtil.ok(token);  // ✅ 使用统一格式
     }
 
     @Data

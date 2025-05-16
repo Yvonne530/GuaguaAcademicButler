@@ -1,12 +1,11 @@
 package org.example.edumanagementservice.controller;
 
-
-
 import org.example.edumanagementservice.dto.DepartmentDTO;
 import org.example.edumanagementservice.service.DepartmentService;
 import org.example.edumanagementservice.util.ResponseUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,29 +19,29 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @PostMapping
-    public Object createDepartment(@RequestBody DepartmentDTO dto) {
-        return ResponseUtil.success(String.valueOf(departmentService.createDepartment(dto)));
+    public ResponseEntity<?> createDepartment(@RequestBody DepartmentDTO dto) {
+        return ResponseUtil.created(departmentService.createDepartment(dto));
     }
 
     @PutMapping("/{id}")
-    public Object updateDepartment(@PathVariable Long id, @RequestBody DepartmentDTO dto) {
-        return ResponseUtil.success(String.valueOf(departmentService.updateDepartment(id, dto)));
+    public ResponseEntity<?> updateDepartment(@PathVariable Long id, @RequestBody DepartmentDTO dto) {
+        return ResponseUtil.ok(departmentService.updateDepartment(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public Object deleteDepartment(@PathVariable Long id) {
+    public ResponseEntity<?> deleteDepartment(@PathVariable Long id) {
         departmentService.deleteDepartment(id);
-        return ResponseUtil.success("删除成功");
+        return ResponseUtil.ok("删除成功");
     }
 
     @GetMapping("/{id}")
-    public Object getDepartment(@PathVariable Long id) {
-        return ResponseUtil.success(String.valueOf(departmentService.getDepartmentById(id)));
+    public ResponseEntity<?> getDepartment(@PathVariable Long id) {
+        return ResponseUtil.ok(departmentService.getDepartmentById(id));
     }
 
     @GetMapping
-    public Object listDepartments() {
+    public ResponseEntity<?> listDepartments() {
         List<DepartmentDTO> list = departmentService.getAllDepartments();
-        return ResponseUtil.success(list.toString());
+        return ResponseUtil.ok(list);
     }
 }
