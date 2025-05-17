@@ -28,4 +28,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RoleType role;
+
+    @Column(length = 64)
+    private String dept; // ✅ 新增字段：部门（可选）
 }

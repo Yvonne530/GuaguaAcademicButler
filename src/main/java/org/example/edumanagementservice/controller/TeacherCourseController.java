@@ -1,6 +1,7 @@
 package org.example.edumanagementservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.edumanagementservice.service.PermissionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByAccount(String account);
-    List<User> findByRole(RoleType role);
-    void deleteByAccount(String account);
+    Optional<User> findByAccount(String account);      // ✅ 查找用户
+    List<User> findByRole(RoleType role);              // ✅ 按角色查找
+    List<User> findByDept(String dept);                // ✅ 按部门查找
+    void deleteByAccount(String account);              // ✅ 删除用户
 }

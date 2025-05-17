@@ -19,12 +19,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(String account, String rawPassword, RoleType role) {
-        if (userRepository.existsByUsername(account)) {
+        if (userRepository.findByAccount(account).isPresent()) {
             throw new IllegalArgumentException("账号已存在");
         }
 
         User user = new User();
-        user.setUsername(account);
+        user.setAccount(account);
         user.setPassword(passwordEncoder.encode(rawPassword));
         user.setRole(role);
 
@@ -32,8 +32,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updatePassword(String username, String newPassword) {
-        User user = userRepository.findByUsername(username)
+    public void updatePassword(String account, String newPassword) {
+        User user = userRepository.findByAccount(account)
                 .orElseThrow(() -> new IllegalArgumentException("用户不存在"));
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String account) {
-        User user = userRepository.findByUsername(account)
+        User user = userRepository.findByAccount(account)
                 .orElseThrow(() -> new IllegalArgumentException("用户不存在"));
         userRepository.delete(user);
     }

@@ -1,12 +1,12 @@
 package org.example.edumanagementservice.strategy;
 
-import com.edu.management.model.Admin;
-import org.example.edumanagementservice.enums.RoleType;
-import com.edu.management.repository.AdminRepository;
-import com.edu.management.exception.CustomException;
-import org.example.edumanagementservice.util.JwtTokenProvider;
+import org.example.edumanagementservice.model.Admin;
+import org.example.edumanagementservice.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.edumanagementservice.enums.RoleType;
+import org.example.edumanagementservice.exception.CustomException;
+import org.example.edumanagementservice.util.JwtTokenProvider;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 

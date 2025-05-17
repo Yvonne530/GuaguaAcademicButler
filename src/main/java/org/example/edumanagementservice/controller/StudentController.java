@@ -3,6 +3,8 @@ package org.example.edumanagementservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.edumanagementservice.dto.CourseSelectionDTO;
 import org.example.edumanagementservice.model.JwtUser;
+import org.example.edumanagementservice.service.CourseSelectionService;
+import org.example.edumanagementservice.service.UserService;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@RestCon
-@troller
+@RestController
 @RequestMapping("/api/student")
 @RequiredArgsConstructor
 public class StudentController {

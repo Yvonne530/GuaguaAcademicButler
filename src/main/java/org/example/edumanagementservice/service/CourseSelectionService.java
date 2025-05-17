@@ -19,6 +19,11 @@ public class CourseSelectionService {
     private final CourseSelectionRepository repository;
     private final DistributedLockService lockService;
 
+    // ✅ 新增公开方法，供 Controller 调用
+    public void selectCourse(String studentId, CourseSelectionDTO dto) {
+        selectCourseWithLock(studentId, dto); // 使用加锁版本确保并发安全
+    }
+
     @Transactional
     public void selectCourseWithLock(String studentId, CourseSelectionDTO dto) {
         String lockKey = "selection:" + dto.getCourseCode();
@@ -34,7 +39,7 @@ public class CourseSelectionService {
             CourseSelection cs = new CourseSelection(null, studentId, dto.getCourseCode(), dto.getSemester());
             repository.save(cs);
         } finally {
-            lockService.unlock(lockKey); // ✅ 正确方法，释放锁
+            lockService.unlock(lockKey);
         }
     }
 

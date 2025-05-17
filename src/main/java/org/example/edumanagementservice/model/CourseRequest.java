@@ -34,4 +34,5 @@ public class CourseRequest {
     private LocalDateTime reviewedAt;
 
     private String reviewer; // 管理员用户名
+
 }
