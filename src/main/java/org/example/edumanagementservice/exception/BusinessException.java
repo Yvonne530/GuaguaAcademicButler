@@ -1,5 +1,8 @@
 package org.example.edumanagementservice.exception;
 
+import lombok.Getter;
+
+@Getter
 public class BusinessException extends RuntimeException {
     private final int code;
 
@@ -8,7 +11,4 @@ public class BusinessException extends RuntimeException {
         this.code = code;
     }
 
-    public int getCode() {
-        return code;
-    }
 }

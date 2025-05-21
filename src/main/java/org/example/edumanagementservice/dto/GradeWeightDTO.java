@@ -18,10 +18,5 @@ public class GradeWeightDTO {
 
     private String itemName;
 
-    // 新增构造函数，方便只传 itemName 和 weight
-    public GradeWeightDTO(String itemName, double weight) {
-        this.itemName = itemName;
-        this.weight = weight;
-    }
 }
 

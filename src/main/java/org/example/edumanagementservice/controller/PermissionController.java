@@ -77,7 +77,7 @@ public class PermissionController {
     /* --------------------------- Admin APIs --------------------------- */
 
     @PostMapping("/assign")
-    public BaseResponse<Boolean> assignPermission(@RequestParam Integer teacherId, @RequestParam Boolean canPublish) {
+    public BaseResponse<Boolean> assignPermission(@RequestParam Long teacherId, @RequestParam Boolean canPublish) {
         try {
             boolean result = permissionService.assignPermission(teacherId, canPublish);
             return BaseResponse.success(result, "权限分配成功");
@@ -87,10 +87,20 @@ public class PermissionController {
     }
 
     @PostMapping("/course/approve")
-    public BaseResponse<Boolean> approveCourse(@RequestParam Integer courseId, @RequestParam Boolean approved) {
+    public BaseResponse<Boolean> approveCourse(@RequestParam Long courseId, @RequestParam Boolean approved) {
         try {
             boolean result = permissionService.approveCourse(courseId, approved);
             return BaseResponse.success(result, "课程审核操作成功");
+        } catch (Exception e) {
+            return BaseResponse.fail(HttpStatus.FORBIDDEN, e.getMessage());
+        }
+    }
+
+    @PostMapping("/course/publish")
+    public BaseResponse<Boolean> publishCourse(@RequestParam Long courseId, @RequestParam Long teacherId) {
+        try {
+            boolean result = permissionService.publishCourse(courseId, teacherId);
+            return BaseResponse.success(result, "课程发布成功");
         } catch (Exception e) {
             return BaseResponse.fail(HttpStatus.FORBIDDEN, e.getMessage());
         }

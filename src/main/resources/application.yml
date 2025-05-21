@@ -1,0 +1,50 @@
+spring:
+  sql:
+    init:
+      mode: never
+      schema-locations: [ ]
+      data-locations: [ ]
+
+  application:
+    name: edu-management-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/edu_db?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        proc.param_null_passing: true
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+  redis:
+    redisson:
+      config: >
+        {
+          "singleServerConfig": {
+            "address": "redis://redis-16988.c257.us-east-1-3.ec2.redns.redis-cloud.com:16988",
+            "password": "4QB16RFrvb6SUWaI229egAL6RhluoMr5",
+            "database": 0,
+            "connectionMinimumIdleSize": 2,
+            "connectionPoolSize": 8,
+            "idleConnectionTimeout": 10000,
+            "connectTimeout": 10000,
+            "timeout": 3000,
+            "retryAttempts": 2,
+            "retryInterval": 1500
+          }
+        }
+jwt:
+  secret: v2NjC/H5Zc5zL2z2o6Y+LEytdbtRAqOwBacEipCQwWhwtvGWy+O0G8t5rgMzIg6N0aCkF5HgNTTDG4BgDbaBP7g==
+  expiration: 3600000  # 1小时，单位毫秒

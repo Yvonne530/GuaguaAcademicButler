@@ -62,13 +62,13 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public boolean assignPermission(Integer teacherId, Boolean canPublish) {
+    public boolean assignPermission(Long teacherId, Boolean canPublish) {
         // 假设 assignPermission 功能不再适用于 Permission 实体，暂不实现
         throw new UnsupportedOperationException("权限分配功能不适用于 Permission 实体");
     }
 
     @Override
-    public boolean approveCourse(Integer courseId, boolean approved) {
+    public boolean approveCourse(Long courseId, boolean approved) {
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new RuntimeException("课程不存在"));
         if ("APPROVED".equals(course.getStatus()) || "REJECTED".equals(course.getStatus())) {
@@ -78,9 +78,10 @@ public class PermissionServiceImpl implements PermissionService {
         courseRepository.save(course);
         return true;
     }
+
     @Override
-    public boolean publishCourse(Integer courseId, Integer teacherId) {
-        // 查找权限记录
+    public boolean publishCourse(Long courseId, Long teacherId) {
+        // 查找权限记录（此处用 teacherId.toString() 作为权限名）
         Permission permission = permissionRepository.findByName(teacherId.toString())
                 .orElseThrow(() -> new RuntimeException("教师权限未配置"));
 
@@ -88,7 +89,6 @@ public class PermissionServiceImpl implements PermissionService {
             throw new RuntimeException("教师无权发布课程");
         }
 
-        // 发布课程（此处你可以自行定义发布逻辑）
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new RuntimeException("课程不存在"));
         course.setStatus("PUBLISHED");

@@ -1,0 +1,4 @@
+singleServerConfig:
+  address: "redis://redis-16988.c257.us-east-1-3.ec2.redns.redis-cloud.com:16988"
+  password: "4QB16RFrvb6SUWaI229egAL6RhluoMr5"
+  database: 0

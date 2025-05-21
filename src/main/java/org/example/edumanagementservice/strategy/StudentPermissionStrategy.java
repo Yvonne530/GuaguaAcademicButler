@@ -14,8 +14,4 @@ public class StudentPermissionStrategy implements PermissionStrategy {
             "COURSE_VIEW", "COURSE_ENROLL", "SCHEDULE_VIEW", "INFO_UPDATE"
     );
 
-    @Override
-    public boolean hasPermission(String permissionKey) {
-        return ALLOWED.contains(permissionKey);
-    }
 }

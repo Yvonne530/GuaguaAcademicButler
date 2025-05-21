@@ -17,7 +17,7 @@ public class TeacherCourseController {
 
     // 教师发布课程
     @PostMapping("/publish")
-    public ResponseEntity<?> publish(@RequestParam Integer courseId, @RequestParam Integer teacherId) {
+    public ResponseEntity<?> publish(@RequestParam Long courseId, @RequestParam Long teacherId) {
         return ResponseEntity.ok(permissionService.publishCourse(courseId, teacherId));
     }
 }

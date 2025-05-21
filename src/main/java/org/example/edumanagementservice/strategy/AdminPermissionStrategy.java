@@ -8,9 +8,4 @@ import org.springframework.stereotype.Component;
 @Component("adminPermissionStrategy")
 public class AdminPermissionStrategy implements PermissionStrategy {
 
-    @Override
-    public boolean hasPermission(String permissionKey) {
-        // 管理员默认拥有所有权限
-        return true;
-    }
 }

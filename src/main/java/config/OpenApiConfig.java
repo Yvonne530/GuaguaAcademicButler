@@ -1,8 +1,8 @@
 package config;
 
-import io.swagger.v3.oas.annotations.info.Contact;
-import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +16,8 @@ public class OpenApiConfig {
                         .title("呱呱学术管家 API 文档")
                         .version("v1.0")
                         .description("用于学生、教师、管理员的后端接口")
-                        .contact(new Contact().name("开发者小爪").email("xiao.zhua@example.com")));
+                        .contact(new Contact()
+                                .name("开发者小爪")
+                                .email("xiao.zhua@example.com")));
     }
 }

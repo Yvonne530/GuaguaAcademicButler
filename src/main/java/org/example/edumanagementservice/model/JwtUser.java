@@ -64,21 +64,4 @@ public class JwtUser implements UserDetails {
         return this.enabled;
     }
 
-    /**
-     * 便捷构造方法（支持ID）
-     */
-    public static JwtUser build(Long id, String username, RoleType roleType) {
-        JwtUser user = new JwtUser();
-        user.setId(id);
-        user.setUsername(username);
-        user.setRoleType(roleType);
-        return user;
-    }
-
-    /**
-     * 兼容旧代码的构造方法（无ID）
-     */
-    public static JwtUser build(String username, RoleType roleType) {
-        return build(null, username, roleType); // ID可为null（视业务需求调整）
-    }
 }

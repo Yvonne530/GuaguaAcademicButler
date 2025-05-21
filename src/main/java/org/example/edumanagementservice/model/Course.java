@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EntityListeners(org.example.edumanagementservice.model.listener.CourseUpdateListener.class)
+
 public class Course {
 
     @Id

@@ -52,13 +52,6 @@ public class GradeService {
         weightRepo.saveAll(entities);
     }
 
-    public List<GradeWeightDTO> getGradeWeights(Long courseId) {
-        return weightRepo.findByCourseId(courseId)
-                .stream()
-                .map(w -> new GradeWeightDTO(w.getItemName(), w.getWeight().doubleValue()))
-                .toList();
-    }
-
     @Cacheable(value = "studentGrades", key = "#studentId")
     public List<Grade> getGrades(String studentId) {
         return gradeRepository.findByStudentId(studentId);
