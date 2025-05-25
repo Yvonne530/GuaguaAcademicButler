@@ -14,9 +14,9 @@ public class TeacherPermission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    private Integer teacherId;
+    private Long teacherId;
 
     private Boolean canPublishCourse;
 }

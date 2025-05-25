@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum RoleType {
 
+    SUPER_ADMIN("ROLE_SUPER_ADMIN"),
     ADMIN("ROLE_ADMIN"),
     TEACHER("ROLE_TEACHER"),
     STUDENT("ROLE_STUDENT");
@@ -20,12 +21,11 @@ public enum RoleType {
             throw new IllegalArgumentException("用户类型不能为空");
         }
         return switch (userType.toLowerCase()) {
+            case "super_admin" -> SUPER_ADMIN;
             case "admin" -> ADMIN;
             case "teacher" -> TEACHER;
             case "student" -> STUDENT;
             default -> throw new IllegalArgumentException("未知的用户类型：" + userType);
         };
     }
-
-
 }

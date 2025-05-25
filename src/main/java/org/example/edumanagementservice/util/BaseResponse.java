@@ -32,13 +32,6 @@ public class BaseResponse<T> {
     }
 
     /**
-     * 【失败】构造错误响应 (需指定错误码和消息)
-     */
-    public static <T> BaseResponse<T> fail(int code, String message) {
-        return new BaseResponse<>(null, code, message, null);
-    }
-
-    /**
      * 【失败】直接传入HttpStatus构造错误响应 (自动提取code和reason)
      */
     public static <T> BaseResponse<T> fail(HttpStatus status, String detailMessage) {

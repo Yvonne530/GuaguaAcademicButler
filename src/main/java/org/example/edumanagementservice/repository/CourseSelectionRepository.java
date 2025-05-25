@@ -8,6 +8,9 @@ import java.util.List;
 
 @Repository
 public interface CourseSelectionRepository extends JpaRepository<CourseSelection, Long> {
-    List<CourseSelection> findByStudentId(String studentId);
-    boolean existsByStudentIdAndCourseCode(String studentId, String courseCode);
+
+    List<CourseSelection> findByStudentId(Long studentId);
+
+    // 正确嵌套字段写法，代表：CourseSelection.course.code
+    boolean existsByStudentIdAndCourse_CourseCode(Long studentId, String code);
 }

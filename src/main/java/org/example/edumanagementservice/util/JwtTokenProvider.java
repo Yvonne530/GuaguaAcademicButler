@@ -6,10 +6,17 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.example.edumanagementservice.enums.RoleType;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.crypto.SecretKey;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class JwtTokenProvider {
@@ -24,8 +31,17 @@ public class JwtTokenProvider {
 
     @PostConstruct
     public void init() {
-        // 将Base64字符串解码为字节数组，并构造安全密钥
+        if (!StringUtils.hasText(secret)) {
+            throw new IllegalStateException("JWT secret 不能为空");
+        }
         this.secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+    }
+
+    // 新增的核心方法（方案B）
+    public Authentication getAuthentication(String token) {
+        String username = getUsernameFromToken(token);
+        List<GrantedAuthority> authorities = getAuthoritiesFromToken(token);
+        return new UsernamePasswordAuthenticationToken(username, null, authorities);
     }
 
     public String createToken(String username, RoleType roleType) {
@@ -53,8 +69,11 @@ public class JwtTokenProvider {
                     .build()
                     .parseClaimsJws(token);
             return !claims.getBody().getExpiration().before(new Date());
-        } catch (JwtException | IllegalArgumentException e) {
-            return false;
+        } catch (ExpiredJwtException ex) {
+            // 明确区分过期异常
+            throw new JwtException("JWT 已过期", ex);
+        } catch (JwtException | IllegalArgumentException ex) {
+            throw new JwtException("无效的 JWT", ex);
         }
     }
 
@@ -66,5 +85,18 @@ public class JwtTokenProvider {
                 .getBody()
                 .getSubject();
     }
-}
 
+    public String getRoleFromToken(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("role", String.class);
+    }
+
+    public List<GrantedAuthority> getAuthoritiesFromToken(String token) {
+        String role = getRoleFromToken(token);
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role));
+    }
+}

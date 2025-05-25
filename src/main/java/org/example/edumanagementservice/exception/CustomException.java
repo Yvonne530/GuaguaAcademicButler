@@ -1,8 +1,11 @@
 package org.example.edumanagementservice.exception;
 
+import lombok.Getter;
+
 /**
  * 自定义业务异常，用于处理认证、限流等业务逻辑错误
  */
+@Getter
 public class CustomException extends RuntimeException {
 
     // 错误码（可扩展为枚举）
@@ -18,7 +21,4 @@ public class CustomException extends RuntimeException {
         this.errorCode = errorCode;
     }
 
-    public int getErrorCode() {
-        return errorCode;
-    }
 }

@@ -1,32 +1,52 @@
 spring:
-  sql:
-    init:
-      mode: never
-      schema-locations: [ ]
-      data-locations: [ ]
-
   application:
     name: edu-management-service
 
+  # 数据源配置
   datasource:
-    url: jdbc:mysql://localhost:3306/edu_db?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/edu_db?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=utf8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 10
+      connection-init-sql: SET NAMES utf8mb4  # 确保字符集
 
+  # JPA配置（与Flyway兼容模式）
   jpa:
+    hibernate:
+      ddl-auto: validate  # 必须为validate，避免与Flyway冲突
     show-sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
-        proc.param_null_passing: true
+        hbm2ddl.auto: validate  # 二次确认
+        jdbc.lob.non_contextual_creation: true
+        schema_validation: false
 
+  # Flyway完整配置（关键部分）
   flyway:
     enabled: true
-    baseline-on-migrate: true
+    baseline-on-migrate: true  # 首次迁移时自动创建基线
+    validate-on-migrate: true  # 校验已应用的迁移
+    clean-on-validation-error: true  # 校验失败自动清理
+    locations: classpath:db/migration  # 迁移脚本位置
+    encoding: UTF-8
+    table: flyway_schema_history  # 明确指定历史表名
+    connect-retries: 3  # 连接重试次数
+    init-sql: "SET FOREIGN_KEY_CHECKS=0;"  # 初始化SQL
+    schemas: edu_db  # 指定目标schema
+    sql-migration-prefix: V  # 版本前缀
+    sql-migration-separator: __  # 双下划线分隔符
+    sql-migration-suffixes: .sql  # 文件后缀
+    placeholder-replacement: false  # 禁用占位符替换
+
+  # 其他配置保持不变
+  sql:
+    init:
+      mode: never
+
 
   redis:
     redisson:
@@ -45,6 +65,15 @@ spring:
             "retryInterval": 1500
           }
         }
+
+# JWT配置
 jwt:
   secret: v2NjC/H5Zc5zL2z2o6Y+LEytdbtRAqOwBacEipCQwWhwtvGWy+O0G8t5rgMzIg6N0aCkF5HgNTTDG4BgDbaBP7g==
-  expiration: 3600000  # 1小时，单位毫秒
+  expiration: 3600000
+
+# 增强调试配置
+logging:
+  level:
+    org.flywaydb: DEBUG
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG
+    org.hibernate.SQL: DEBUG

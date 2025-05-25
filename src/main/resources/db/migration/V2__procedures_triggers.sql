@@ -16,7 +16,7 @@ BEGIN
         SET NEW.grade = 'D';
     ELSE
         SET NEW.grade = 'F';
-    END IF;
+END IF;
 END;
 //
 
@@ -38,15 +38,15 @@ DROP PROCEDURE IF EXISTS stat_course_scores;
 //
 CREATE PROCEDURE stat_course_scores(IN courseId INT)
 BEGIN
-    SELECT c.course_name,
-           COUNT(sc.id) AS student_count,
-           AVG(sc.score) AS avg_score,
-           MAX(sc.score) AS max_score,
-           MIN(sc.score) AS min_score
-    FROM score sc
-             JOIN course c ON sc.course_id = c.id
-    WHERE sc.course_id = courseId
-    GROUP BY c.course_name;
+SELECT c.course_name,
+       COUNT(sc.id) AS student_count,
+       AVG(sc.score) AS avg_score,
+       MAX(sc.score) AS max_score,
+       MIN(sc.score) AS min_score
+FROM score sc
+         JOIN course c ON sc.course_id = c.id
+WHERE sc.course_id = courseId
+GROUP BY c.course_name;
 END;
 //
 

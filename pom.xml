@@ -20,7 +20,13 @@
     <description>Educational administration backend system with Spring Boot</description>
 
     <properties>
+        <!-- 统一Java版本为17（Spring Boot 3.2.0官方支持版本） -->
         <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+
+        <!-- 其他依赖版本保持不变 -->
         <jjwt.version>0.11.5</jjwt.version>
         <caffeine.version>3.1.8</caffeine.version>
         <easyexcel.version>3.3.2</easyexcel.version>
@@ -162,25 +168,40 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
+            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
+
+            <!-- 修正后的Compiler Plugin配置 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <release>${java.version}</release>
                     <encoding>UTF-8</encoding>
+                    <!-- 移除able-preview参数 -->
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
 
-            <!-- Flyway 插件配置修复 -->
+            <!-- Flyway插件配置保持不变 -->
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
@@ -194,9 +215,6 @@
                     </schemas>
                 </configuration>
             </plugin>
-
-
         </plugins>
     </build>
-
 </project>

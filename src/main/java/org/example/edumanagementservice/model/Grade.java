@@ -1,5 +1,4 @@
 package org.example.edumanagementservice.model;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,8 +14,12 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "student_id")
     private String studentId;
+
+    @Column(name = "course_code")
     private String courseCode;
+
     private String semester;
     private Double score;
 }

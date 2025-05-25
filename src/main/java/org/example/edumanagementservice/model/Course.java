@@ -11,22 +11,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
+@Table(name = "course")
 public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    // 建议重命名为 courseName（推荐方式）
+    private String courseName;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id")  // 外键列名
-    private TeacherPermission teacher;  // 改为 Teacher 实体类型
+    @JoinColumn(name = "teacher_id")
+    private TeacherPermission teacher;
 
-    private String code;
+    private String courseCode;
 
     private String status;
 
     private String description;
+
+    private String semester;
 }

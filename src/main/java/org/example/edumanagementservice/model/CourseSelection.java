@@ -18,8 +18,10 @@ public class CourseSelection {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String studentId;
-    private String courseCode;
+    @Column(name = "student_id")
+    private Long studentId;
+    @ManyToOne
+    @JoinColumn(name = "course_id", nullable = false)
+    private Course course;
     private String semester;
 }

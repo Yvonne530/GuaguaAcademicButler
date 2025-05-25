@@ -32,11 +32,6 @@ public class CachePool {
         return cacheObject.getValue();
     }
 
-    // 删除缓存
-    public void remove(String key) {
-        cacheMap.remove(key);
-    }
-
     // 清理所有过期项（可定时调度）
     public void cleanup() {
         long now = System.currentTimeMillis();

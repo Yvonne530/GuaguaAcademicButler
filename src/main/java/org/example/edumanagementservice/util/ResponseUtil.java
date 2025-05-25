@@ -22,18 +22,4 @@ public class ResponseUtil {
                 .body(new BaseResponse<>(null, 201, "创建成功", data));
     }
 
-    public static <T> ResponseEntity<BaseResponse<T>> fail(int code, String msg) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new BaseResponse<>(null, code, msg, null));
-    }
-
-    public static <T> ResponseEntity<BaseResponse<T>> notFound(String msg) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new BaseResponse<>(null, 404, msg, null));
-    }
-
-    public static <T> ResponseEntity<BaseResponse<T>> conflict(String msg) {
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(new BaseResponse<>(null, 409, msg, null));
-    }
 }
