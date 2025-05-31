@@ -170,11 +170,13 @@
     </dependencies>
     <build>
         <plugins>
-            <!-- Spring Boot Maven Plugin -->
+            <!-- ✅ Spring Boot Maven Plugin（合并 mainClass + lombok exclude） -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.2.0</version>
                 <configuration>
+                    <mainClass>org.example.edumanagementservice.EduManagementApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -184,7 +186,7 @@
                 </configuration>
             </plugin>
 
-            <!-- 修正后的Compiler Plugin配置 -->
+            <!-- ✅ Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -194,14 +196,13 @@
                     <target>${java.version}</target>
                     <release>${java.version}</release>
                     <encoding>UTF-8</encoding>
-                    <!-- 移除able-preview参数 -->
                     <compilerArgs>
                         <arg>-parameters</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
 
-            <!-- Flyway插件配置保持不变 -->
+            <!-- ✅ Flyway Plugin -->
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
@@ -217,4 +218,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
