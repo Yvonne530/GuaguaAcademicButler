@@ -165,3 +165,5 @@ mvn test
 - Q1：运行时报 Lombok 错误怎么办？ A：请确保 IDE 安装了 Lombok 插件，并在 Settings > Build, Execution, Deployment > Compiler 勾选 Annotation Processors。
 - Q2：Redis 是必需的吗？A：项目使用 Redisson 支持缓存和分布式锁，若 Redis 不可用，可将 Redisson 相关配置暂时注释掉或配置为本地。
 - Q3：数据库初始化 SQL 没有怎么办？A：你可以根据实体类结构手动建表，建议作者提供 init.sql 脚本（可放入 /sql/init.sql）。
+### 未完成 ：接口测试全都500报错
+
