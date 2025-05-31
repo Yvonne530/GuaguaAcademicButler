@@ -1,0 +1,3281 @@
+{
+	"info": {
+		"_postman_id": "eb38c729-97e5-49a2-88cb-9d749f56d4fa",
+		"name": "呱呱学术管家 API 文档",
+		"description": "用于学生、教师、管理员的后端接口\n\nContact Support:\n Name: 开发者小爪\n Email: xiao.zhua@example.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44634264"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "permissions",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "get By Id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/permissions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"permissions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "93263941",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/permissions/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"permissions",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"requestId\": \"nisi Lorem\",\n  \"code\": 67684037,\n  \"message\": \"labore et culpa\",\n  \"data\": {\n    \"id\": -10724469,\n    \"name\": \"minim reprehenderit Ut laboris\",\n    \"description\": \"aute Excepteur dolor\"\n  }\n}"
+										}
+									]
+								},
+								{
+									"name": "update",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 69179108,\n  \"name\": \"anim dolore\",\n  \"description\": \"ex Lorem\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/permissions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"permissions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "93263941",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": 69179108,\n  \"name\": \"anim dolore\",\n  \"description\": \"ex Lorem\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/permissions/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"permissions",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"requestId\": \"nisi Lorem\",\n  \"code\": 67684037,\n  \"message\": \"labore et culpa\",\n  \"data\": {\n    \"id\": -10724469,\n    \"name\": \"minim reprehenderit Ut laboris\",\n    \"description\": \"aute Excepteur dolor\"\n  }\n}"
+										}
+									]
+								},
+								{
+									"name": "delete",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/permissions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"permissions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "93263941",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/permissions/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"permissions",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"requestId\": \"incididunt deserunt officia\",\n  \"code\": 43006244,\n  \"message\": \"nulla eu adipisicing sed\",\n  \"data\": {}\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "course",
+							"item": [
+								{
+									"name": "publish",
+									"item": [
+										{
+											"name": "publish Course",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/permissions/course/publish?courseId=93263941&teacherId=93263941",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"permissions",
+														"course",
+														"publish"
+													],
+													"query": [
+														{
+															"key": "courseId",
+															"value": "93263941",
+															"description": "(Required) "
+														},
+														{
+															"key": "teacherId",
+															"value": "93263941",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/permissions/course/publish?courseId=93263941&teacherId=93263941",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"permissions",
+																"course",
+																"publish"
+															],
+															"query": [
+																{
+																	"key": "courseId",
+																	"value": "93263941",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "teacherId",
+																	"value": "93263941",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"requestId\": \"veniam sit commodo ad\",\n  \"code\": -4451273,\n  \"message\": \"do\",\n  \"data\": true\n}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "approve",
+									"item": [
+										{
+											"name": "approve Course",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/permissions/course/approve?courseId=93263941&approved=false",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"permissions",
+														"course",
+														"approve"
+													],
+													"query": [
+														{
+															"key": "courseId",
+															"value": "93263941",
+															"description": "(Required) "
+														},
+														{
+															"key": "approved",
+															"value": "false",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/permissions/course/approve?courseId=93263941&approved=false",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"permissions",
+																"course",
+																"approve"
+															],
+															"query": [
+																{
+																	"key": "courseId",
+																	"value": "93263941",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "approved",
+																	"value": "false",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"requestId\": \"veniam sit commodo ad\",\n  \"code\": -4451273,\n  \"message\": \"do\",\n  \"data\": true\n}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "assign",
+							"item": [
+								{
+									"name": "assign Permission",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/permissions/assign?teacherId=93263941&canPublish=true",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"permissions",
+												"assign"
+											],
+											"query": [
+												{
+													"key": "teacherId",
+													"value": "93263941",
+													"description": "(Required) "
+												},
+												{
+													"key": "canPublish",
+													"value": "true",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/permissions/assign?teacherId=93263941&canPublish=true",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"permissions",
+														"assign"
+													],
+													"query": [
+														{
+															"key": "teacherId",
+															"value": "93263941",
+															"description": "(Required) "
+														},
+														{
+															"key": "canPublish",
+															"value": "true",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"requestId\": \"veniam sit commodo ad\",\n  \"code\": -4451273,\n  \"message\": \"do\",\n  \"data\": true\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "get All",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/permissions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"permissions"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/permissions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"permissions"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"requestId\": \"occaecat ut dolore nostrud deserunt\",\n  \"code\": -13534242,\n  \"message\": \"Duis adipisicing\",\n  \"data\": [\n    {\n      \"id\": 77316466,\n      \"name\": \"ut sunt\",\n      \"description\": \"est elit ir\"\n    },\n    {\n      \"id\": 85536343,\n      \"name\": \"proident exercitation irure\",\n      \"description\": \"nostrud non null\"\n    }\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 69179108,\n  \"name\": \"anim dolore\",\n  \"description\": \"ex Lorem\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/permissions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"permissions"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 69179108,\n  \"name\": \"anim dolore\",\n  \"description\": \"ex Lorem\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/permissions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"permissions"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"requestId\": \"nisi Lorem\",\n  \"code\": 67684037,\n  \"message\": \"labore et culpa\",\n  \"data\": {\n    \"id\": -10724469,\n    \"name\": \"minim reprehenderit Ut laboris\",\n    \"description\": \"aute Excepteur dolor\"\n  }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "majors",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "get Major",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/majors/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"majors",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "93263941",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/majors/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"majors",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "update Major",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"departmentId\": 11105220,\n  \"name\": \"enim dolore dolor irure\",\n  \"id\": -6339978,\n  \"description\": \"aliqua in\",\n  \"departmentName\": \"proident culpa deserunt consequat\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/majors/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"majors",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "93263941",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"departmentId\": 11105220,\n  \"name\": \"enim dolore dolor irure\",\n  \"id\": -6339978,\n  \"description\": \"aliqua in\",\n  \"departmentName\": \"proident culpa deserunt consequat\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/majors/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"majors",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "delete Major",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/majors/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"majors",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "93263941",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/majors/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"majors",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "department",
+							"item": [
+								{
+									"name": "{departmentId}",
+									"item": [
+										{
+											"name": "get Majors By Department",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/majors/department/:departmentId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"majors",
+														"department",
+														":departmentId"
+													],
+													"variable": [
+														{
+															"key": "departmentId",
+															"value": "93263941",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/majors/department/:departmentId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"majors",
+																"department",
+																":departmentId"
+															],
+															"variable": [
+																{
+																	"key": "departmentId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "list Majors",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/majors",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"majors"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/majors",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"majors"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{}"
+								}
+							]
+						},
+						{
+							"name": "create Major",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"departmentId\": 11105220,\n  \"name\": \"enim dolore dolor irure\",\n  \"id\": -6339978,\n  \"description\": \"aliqua in\",\n  \"departmentName\": \"proident culpa deserunt consequat\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/majors",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"majors"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"departmentId\": 11105220,\n  \"name\": \"enim dolore dolor irure\",\n  \"id\": -6339978,\n  \"description\": \"aliqua in\",\n  \"departmentName\": \"proident culpa deserunt consequat\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/majors",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"majors"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "departments",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "get Department",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/departments/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"departments",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "93263941",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/departments/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"departments",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "update Department",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 69179108,\n  \"name\": \"anim dolore\",\n  \"description\": \"ex Lorem\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/departments/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"departments",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "93263941",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": 69179108,\n  \"name\": \"anim dolore\",\n  \"description\": \"ex Lorem\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/departments/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"departments",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "delete Department",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/departments/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"departments",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "93263941",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/departments/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"departments",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "list Departments",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/departments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"departments"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/departments",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"departments"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{}"
+								}
+							]
+						},
+						{
+							"name": "create Department",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 69179108,\n  \"name\": \"anim dolore\",\n  \"description\": \"ex Lorem\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/departments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"departments"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 69179108,\n  \"name\": \"anim dolore\",\n  \"description\": \"ex Lorem\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/departments",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"departments"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "teacher",
+					"item": [
+						{
+							"name": "course",
+							"item": [
+								{
+									"name": "publish",
+									"item": [
+										{
+											"name": "publish",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/teacher/course/publish?courseId=93263941&teacherId=93263941",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"teacher",
+														"course",
+														"publish"
+													],
+													"query": [
+														{
+															"key": "courseId",
+															"value": "93263941",
+															"description": "(Required) "
+														},
+														{
+															"key": "teacherId",
+															"value": "93263941",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/teacher/course/publish?courseId=93263941&teacherId=93263941",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"teacher",
+																"course",
+																"publish"
+															],
+															"query": [
+																{
+																	"key": "courseId",
+																	"value": "93263941",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "teacherId",
+																	"value": "93263941",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "student",
+					"item": [
+						{
+							"name": "select",
+							"item": [
+								{
+									"name": "select Course",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"courseCode\": \"culpa anim non\",\n  \"semester\": \"dolor est\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/student/select",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"student",
+												"select"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"courseCode\": \"culpa anim non\",\n  \"semester\": \"dolor est\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/student/select",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"student",
+														"select"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "grade",
+					"item": [
+						{
+							"name": "weights",
+							"item": [
+								{
+									"name": "{courseId}",
+									"item": [
+										{
+											"name": "设置分数比重",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "[\n  {\n    \"assessmentType\": \"\",\n    \"weight\": 29.040687732140903,\n    \"itemName\": \"ea ut est\"\n  },\n  {\n    \"assessmentType\": \"ex do n\",\n    \"weight\": 36.16260075895437,\n    \"itemName\": \"sunt nulla veniam\"\n  }\n]",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/grade/weights/:courseId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"grade",
+														"weights",
+														":courseId"
+													],
+													"variable": [
+														{
+															"key": "courseId",
+															"value": "93263941",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "需满足权重总和=100%"
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "[\n  {\n    \"assessmentType\": \"\",\n    \"weight\": 29.040687732140903,\n    \"itemName\": \"ea ut est\"\n  },\n  {\n    \"assessmentType\": \"ex do n\",\n    \"weight\": 36.16260075895437,\n    \"itemName\": \"sunt nulla veniam\"\n  }\n]",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/grade/weights/:courseId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"grade",
+																"weights",
+																":courseId"
+															],
+															"variable": [
+																{
+																	"key": "courseId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "submit",
+							"item": [
+								{
+									"name": "submit Grade",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"studentId\": \"ut laborum dolore laboris\",\n  \"courseCode\": \"occaecat Lorem nulla\",\n  \"semester\": \"dolor in deserunt non est\",\n  \"score\": -64221205.604595035\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/grade/submit",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"grade",
+												"submit"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"studentId\": \"ut laborum dolore laboris\",\n  \"courseCode\": \"occaecat Lorem nulla\",\n  \"semester\": \"dolor in deserunt non est\",\n  \"score\": -64221205.604595035\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/grade/submit",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"grade",
+														"submit"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "view",
+							"item": [
+								{
+									"name": "view Grades",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/grade/view",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"grade",
+												"view"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/grade/view",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"grade",
+														"view"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "course-requests",
+					"item": [
+						{
+							"name": "status-change",
+							"item": [
+								{
+									"name": "submit Status Change",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": -86605911,\n  \"courseId\": -33375416,\n  \"studentId\": 40520629,\n  \"requestType\": \"CLOSE_COURSE\",\n  \"status\": \"PENDING\",\n  \"reason\": \"sit Lorem\",\n  \"reviewer\": \"ut\",\n  \"createdAt\": \"1971-04-13T09:40:32.430Z\",\n  \"reviewedAt\": \"1974-09-14T11:17:52.972Z\",\n  \"statusChangeReason\": \"elit ea consectetur\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/course-requests/status-change",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"course-requests",
+												"status-change"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": -86605911,\n  \"courseId\": -33375416,\n  \"studentId\": 40520629,\n  \"requestType\": \"CLOSE_COURSE\",\n  \"status\": \"PENDING\",\n  \"reason\": \"sit Lorem\",\n  \"reviewer\": \"ut\",\n  \"createdAt\": \"1971-04-13T09:40:32.430Z\",\n  \"reviewedAt\": \"1974-09-14T11:17:52.972Z\",\n  \"statusChangeReason\": \"elit ea consectetur\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/course-requests/status-change",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"course-requests",
+														"status-change"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "review",
+							"item": [
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "review",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/course-requests/review/:id?approve=true&reviewer=est tempor",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"course-requests",
+														"review",
+														":id"
+													],
+													"query": [
+														{
+															"key": "approve",
+															"value": "true",
+															"description": "(Required) "
+														},
+														{
+															"key": "reviewer",
+															"value": "est tempor",
+															"description": "(Required) "
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "93263941",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/course-requests/review/:id?approve=true&reviewer=est tempor",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"course-requests",
+																"review",
+																":id"
+															],
+															"query": [
+																{
+																	"key": "approve",
+																	"value": "true",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "reviewer",
+																	"value": "est tempor",
+																	"description": "(Required) "
+																}
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "student",
+							"item": [
+								{
+									"name": "{studentId}",
+									"item": [
+										{
+											"name": "list By Student",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/course-requests/student/:studentId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"course-requests",
+														"student",
+														":studentId"
+													],
+													"variable": [
+														{
+															"key": "studentId",
+															"value": "93263941",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/course-requests/student/:studentId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"course-requests",
+																"student",
+																":studentId"
+															],
+															"variable": [
+																{
+																	"key": "studentId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "pending",
+							"item": [
+								{
+									"name": "pending",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/course-requests/pending",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"course-requests",
+												"pending"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/course-requests/pending",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"course-requests",
+														"pending"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "submit",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": -86605911,\n  \"courseId\": -33375416,\n  \"studentId\": 40520629,\n  \"requestType\": \"CLOSE_COURSE\",\n  \"status\": \"PENDING\",\n  \"reason\": \"sit Lorem\",\n  \"reviewer\": \"ut\",\n  \"createdAt\": \"1971-04-13T09:40:32.430Z\",\n  \"reviewedAt\": \"1974-09-14T11:17:52.972Z\",\n  \"statusChangeReason\": \"elit ea consectetur\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/course-requests",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"course-requests"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": -86605911,\n  \"courseId\": -33375416,\n  \"studentId\": 40520629,\n  \"requestType\": \"CLOSE_COURSE\",\n  \"status\": \"PENDING\",\n  \"reason\": \"sit Lorem\",\n  \"reviewer\": \"ut\",\n  \"createdAt\": \"1971-04-13T09:40:32.430Z\",\n  \"reviewedAt\": \"1974-09-14T11:17:52.972Z\",\n  \"statusChangeReason\": \"elit ea consectetur\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/course-requests",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"course-requests"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "refresh",
+							"item": [
+								{
+									"name": "刷新 Access Token",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"userType\": \"Duis aute elit\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/auth/refresh",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"refresh"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"userType\": \"Duis aute elit\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/auth/refresh",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"auth",
+														"refresh"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "login",
+							"item": [
+								{
+									"name": "用户登录（管理员/教师/学生）",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"sit nostrud\",\n  \"password\": \"cillum consectetur ut\",\n  \"userType\": \"dolor\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/auth/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"login"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"username\": \"sit nostrud\",\n  \"password\": \"cillum consectetur ut\",\n  \"userType\": \"dolor\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/auth/login",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"auth",
+														"login"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "teacher",
+							"item": [
+								{
+									"name": "batch",
+									"item": [
+										{
+											"name": "batch Add Teachers",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"Ut56_\": {},\n  \"consequat_4f\": {}\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/admin/teacher/batch",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"admin",
+														"teacher",
+														"batch"
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"Ut56_\": {},\n  \"consequat_4f\": {}\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/admin/teacher/batch",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"admin",
+																"teacher",
+																"batch"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "add",
+									"item": [
+										{
+											"name": "add Teacher",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"Ut56_\": {},\n  \"consequat_4f\": {}\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/admin/teacher/add",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"admin",
+														"teacher",
+														"add"
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"Ut56_\": {},\n  \"consequat_4f\": {}\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/admin/teacher/add",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"admin",
+																"teacher",
+																"add"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "{account}",
+									"item": [
+										{
+											"name": "delete Teacher",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/admin/teacher/:account",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"admin",
+														"teacher",
+														":account"
+													],
+													"variable": [
+														{
+															"key": "account",
+															"value": "est tempor",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/admin/teacher/:account",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"admin",
+																"teacher",
+																":account"
+															],
+															"variable": [
+																{
+																	"key": "account"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "list Teachers",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/admin/teacher",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"admin",
+												"teacher"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/admin/teacher",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"admin",
+														"teacher"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "students",
+							"item": [
+								{
+									"name": "batch-import",
+									"item": [
+										{
+											"name": "batch Import",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"file\": \"amet\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/admin/students/batch-import",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"admin",
+														"students",
+														"batch-import"
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"file\": \"amet\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/api/admin/students/batch-import",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"admin",
+																"students",
+																"batch-import"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "score",
+					"item": [
+						{
+							"name": "student",
+							"item": [
+								{
+									"name": "{studentId}",
+									"item": [
+										{
+											"name": "get Scores By Student Id",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/score/student/:studentId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"score",
+														"student",
+														":studentId"
+													],
+													"variable": [
+														{
+															"key": "studentId",
+															"value": "93263941",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/score/student/:studentId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"score",
+																"student",
+																":studentId"
+															],
+															"variable": [
+																{
+																	"key": "studentId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "[\n  {\n    \"id\": -48541456,\n    \"studentId\": -9440868,\n    \"studentName\": \"ex sint\",\n    \"courseName\": \"sunt dolore veniam esse nulla\",\n    \"score\": 72867606.4715975,\n    \"grade\": \"esse consectetur in dolor laborum\"\n  },\n  {\n    \"id\": 60846800,\n    \"studentId\": -50850851,\n    \"studentName\": \"do\",\n    \"courseName\": \"sed occaecat exercitation\",\n    \"score\": 21604313.514516577,\n    \"grade\": \"officia \"\n  }\n]"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "course-requests",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "approve",
+									"item": [
+										{
+											"name": "approve Request",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/admin/course-requests/:id/approve?approved=true",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"admin",
+														"course-requests",
+														":id",
+														"approve"
+													],
+													"query": [
+														{
+															"key": "approved",
+															"value": "true",
+															"description": "(Required) "
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "93263941",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/admin/course-requests/:id/approve?approved=true",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"admin",
+																"course-requests",
+																":id",
+																"approve"
+															],
+															"query": [
+																{
+																	"key": "approved",
+																	"value": "true",
+																	"description": "(Required) "
+																}
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}
