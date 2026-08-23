@@ -1,6 +1,8 @@
 package org.example.edumanagementservice.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -22,9 +24,11 @@ public class CourseRequest {
     private Long studentId;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private RequestType requestType; // 开设或关闭等
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private RequestStatus status; // PENDING, APPROVED, REJECTED
 
     private String reason;
