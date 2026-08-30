@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>呱呱学术管家 - 前端演示</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Microsoft YaHei",system-ui,sans-serif; background:#f0f2f5; color:#333; }
+  .container { max-width:1100px; margin:0 auto; padding:20px; }
+
+  /* 登录 */
+  #loginBox { max-width:400px; margin:80px auto; background:#fff; border-radius:10px;
+    box-shadow:0 4px 20px rgba(0,0,0,.08); padding:30px; }
+  #loginBox h1 { font-size:20px; text-align:center; margin-bottom:5px; color:#1a73e8; }
+  #loginBox p.sub { text-align:center; color:#999; font-size:13px; margin-bottom:20px; }
+  label { display:block; font-size:13px; color:#666; margin:12px 0 4px; }
+  input,select { width:100%; padding:9px 10px; border:1px solid #d9d9d9; border-radius:6px; font-size:14px; }
+  button { cursor:pointer; border:none; border-radius:6px; font-size:14px; }
+  .btn-primary { background:#1a73e8; color:#fff; padding:10px 16px; width:100%; margin-top:18px; }
+  .btn-primary:hover { background:#1765cc; }
+  .msg { font-size:13px; margin-top:10px; min-height:18px; }
+  .msg.err { color:#d93025; }
+  .msg.ok { color:#188038; }
+  .hint { font-size:12px; color:#bbb; margin-top:12px; text-align:center; }
+
+  /* 主界面 */
+  .topbar { background:#1a73e8; color:#fff; padding:12px 0; box-shadow:0 2px 8px rgba(0,0,0,.1); }
+  .topbar .inner { max-width:1100px; margin:0 auto; padding:0 20px; display:flex; align-items:center; justify-content:space-between; }
+  .topbar h2 { font-size:18px; }
+  .topbar .user span { font-size:13px; opacity:.9; margin-right:12px; }
+  .btn-outline { background:transparent; color:#fff; border:1px solid #fff; padding:6px 14px; }
+  .btn-outline:hover { background:rgba(255,255,255,.15); }
+
+  nav { background:#fff; border-bottom:1px solid #e5e5e5; }
+  nav .inner { max-width:1100px; margin:0 auto; padding:0 10px; display:flex; overflow-x:auto; }
+  nav button { background:none; border:none; padding:14px 18px; font-size:14px; color:#555;
+    border-bottom:3px solid transparent; }
+  nav button.active { color:#1a73e8; border-bottom-color:#1a73e8; font-weight:600; }
+  nav button:hover { color:#1a73e8; }
+
+  main { padding:20px 0; }
+  .panel { background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,.05); padding:20px; margin-bottom:20px; }
+  .panel h3 { font-size:16px; margin-bottom:15px; color:#1a73e8; border-left:4px solid #1a73e8; padding-left:10px; }
+  .toolbar { display:flex; gap:8px; margin-bottom:15px; flex-wrap:wrap; align-items:center; }
+  .toolbar input,.toolbar select { width:auto; }
+  .btn { background:#1a73e8; color:#fff; padding:8px 14px; font-size:13px; }
+  .btn.green { background:#188038; }
+  .btn.orange { background:#f9a825; }
+  .btn.red { background:#d93025; }
+  .btn.plain { background:#eee; color:#333; }
+  .btn.sm { padding:5px 10px; font-size:12px; }
+
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th,td { border:1px solid #e5e5e5; padding:8px 10px; text-align:left; }
+  th { background:#f7f8fa; }
+  tr:hover td { background:#fafbfc; }
+  .form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; }
+  .out { background:#f5f7fa; border:1px solid #e5e5e5; border-radius:6px; padding:10px; margin-top:12px;
+    font-size:12px; max-height:180px; overflow:auto; white-space:pre-wrap; word-break:break-all; }
+  .badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:12px; }
+  .badge.gray { background:#eee; color:#666; }
+  .badge.green { background:#e6f4ea; color:#188038; }
+  .badge.orange { background:#fef7e0; color:#f9a825; }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+<!-- 登录界面 -->
+<div id="loginBox">
+  <h1>📘 呱呱学术管家</h1>
+  <p class="sub">后端功能演示界面</p>
+  <label>角色</label>
+  <select id="loginRole">
+    <option value="admin">管理员</option>
+    <option value="teacher">教师</option>
+    <option value="student">学生</option>
+  </select>
+  <label>用户名</label>
+  <input id="loginUser" placeholder="如 admin" value="admin">
+  <label>密码</label>
+  <input id="loginPass" type="password" placeholder="如 admin123" value="admin123">
+  <button class="btn-primary" onclick="doLogin()">登 录</button>
+  <div class="msg" id="loginMsg"></div>
+  <div class="hint">账户：管理员 admin/admin123 · 教师 teacher1/123456 · 学生 student1/123456</div>
+</div>
+
+<!-- 主界面 -->
+<div id="app" class="hidden">
+  <div class="topbar">
+    <div class="inner">
+      <h2>📘 呱呱学术管家</h2>
+      <div class="user">
+        <span id="whoAmI"></span>
+        <button class="btn-outline" onclick="logout()">退出</button>
+      </div>
+    </div>
+  </div>
+  <nav><div class="inner" id="tabs"></div></nav>
+  <main class="container">
+    <div id="pageContent"></div>
+  </main>
+</div>
+<script>
+  let TOKEN = localStorage.getItem('edu_token') || '';
+  let ROLE = localStorage.getItem('edu_role') || '';
+  let USER = localStorage.getItem('edu_user') || '';
+
+  // 通用 fetch 封装：自动带 token，解析 {code,message,data} 或直接返回值
+  async function api(method, url, body) {
+    const opt = { method, headers: { 'Accept': 'application/json' } };
+    if (TOKEN) opt.headers['Authorization'] = 'Bearer ' + TOKEN;
+    if (body !== undefined) {
+      opt.headers['Content-Type'] = 'application/json';
+      opt.body = typeof body === 'string' ? body : JSON.stringify(body);
+    }
+    const resp = await fetch(url, opt);
+    let json = null;
+    try { json = await resp.json(); } catch (e) {}
+    if (json && json.code !== undefined) return json;
+    return { code: resp.status, message: resp.statusText, data: json };
+  }
+
+  async function doLogin() {
+    const username = document.getElementById('loginUser').value.trim();
+    const password = document.getElementById('loginPass').value.trim();
+    const userType = document.getElementById('loginRole').value;
+    const msg = document.getElementById('loginMsg');
+    msg.className = 'msg';
+    msg.textContent = '登录中...';
+    try {
+      const res = await api('POST', '/api/auth/login', { username, password, userType });
+      if (res.code === 200 && res.data && res.data.accessToken) {
+        TOKEN = res.data.accessToken;
+        USER = username;
+        ROLE = userType;
+        localStorage.setItem('edu_token', TOKEN);
+        localStorage.setItem('edu_role', ROLE);
+        localStorage.setItem('edu_user', USER);
+        msg.classList.add('ok');
+        msg.textContent = '登录成功，欢迎 ' + username;
+        showApp();
+      } else {
+        msg.classList.add('err');
+        msg.textContent = (res.data && res.data.message) || res.message || '登录失败';
+      }
+    } catch (e) {
+      msg.classList.add('err');
+      msg.textContent = '请求异常：' + e.message;
+    }
+  }
+
+  function logout() {
+    TOKEN = ''; USER = ''; ROLE = '';
+    localStorage.removeItem('edu_token');
+    localStorage.removeItem('edu_role');
+    localStorage.removeItem('edu_user');
+    location.reload();
+  }
+
+  function showApp() {
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('app').classList.remove('hidden');
+    const roleName = { admin: '管理员', teacher: '教师', student: '学生' }[ROLE] || ROLE;
+    document.getElementById('whoAmI').textContent = USER + '（' + roleName + '）';
+    renderTabs();
+    switchTab('home');
+  }
+
+  const TABS = [
+    { id: 'home', name: '🏠 概览' },
+    { id: 'departments', name: '🏢 院系管理' },
+    { id: 'majors', name: '🎓 专业管理' },
+    { id: 'permissions', name: '🔑 权限管理' },
+    { id: 'grade', name: '📊 成绩模块' },
+    { id: 'requests', name: '📝 课程申请' },
+    { id: 'teacher', name: '👨‍🏫 教师管理' },
+    { id: 'student', name: '🧑‍🎓 学生选课' }
+  ];
+
+  function renderTabs() {
+    const bar = document.getElementById('tabs');
+    bar.innerHTML = TABS.map(t => `<button data-id="${t.id}">${t.name}</button>`).join('');
+    bar.querySelectorAll('button').forEach(b => {
+      b.onclick = () => switchTab(b.dataset.id);
+    });
+  }
+
+  function switchTab(id) {
+    document.querySelectorAll('#tabs button').forEach(b =>
+      b.classList.toggle('active', b.dataset.id === id));
+    const page = document.getElementById('pageContent');
+    const tab = TABS.find(t => t.id === id);
+    page.innerHTML = '<div class="panel"><h3>' + tab.name + '</h3><div class="out hidden" id="errout"></div><div id="pageBody">加载中...</div></div>';
+    if (id === 'departments') loadDepartments();
+    else if (id === 'majors') loadMajors();
+    else if (id === 'permissions') loadPermissions();
+    else if (id === 'grade') loadGrade();
+    else if (id === 'requests') loadRequests();
+    else if (id === 'teacher') loadTeacher();
+    else if (id === 'student') loadStudent();
+    else loadHome();
+  }
+
+  // 工具：在页面显示请求结果
+  function showOut(txt) {
+    const el = document.getElementById('errout');
+    if (!el) return;
+    el.classList.remove('hidden');
+    el.textContent = typeof txt === 'string' ? txt : JSON.stringify(txt, null, 2);
+  }
+  function clearOut() {
+    const el = document.getElementById('errout');
+    if (el) el.classList.add('hidden');
+  }
+</script>
+<script>
+  // ---------- 概览 ----------
+  function loadHome() {
+    const b = document.getElementById('pageBody');
+    const roleName = {admin:'管理员',teacher:'教师',student:'学生'}[ROLE] || ROLE;
+    b.innerHTML = `
+      <p style="color:#666;margin-bottom:12px">这是一个基于后端 REST API 的演示界面。请选择上方标签页查看各项功能。</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <div class="panel">🎫 当前用户：<b>${USER}</b></div>
+        <div class="panel">👤 角色：<b>${roleName}</b></div>
+        <div class="panel">🔗 接口文档：<a href="/swagger-ui/index.html" target="_blank">Swagger UI</a></div>
+      </div>
+      <div class="toolbar" style="margin-top:20px">
+        <button class="btn green" onclick="demoScore()">示例：查询学生1成绩</button>
+        <button class="btn" onclick="demoPending()">示例：查看待审课程申请</button>
+      </div>
+      <div id="demoOut" class="out hidden"></div>`;
+  }
+  async function demoScore() {
+    const r = await api('GET', '/api/score/student/1');
+    showOut(r);
+  }
+  async function demoPending() {
+    const r = await api('GET', '/api/course-requests/pending');
+    showOut(r);
+  }
+
+  // ---------- 院系管理 ----------
+  async function loadDepartments() {
+    const b = document.getElementById('pageBody');
+    b.innerHTML = `
+      <div class="form-grid">
+        <input id="dName" placeholder="院系名称">
+        <input id="dDesc" placeholder="描述">
+        <button class="btn green" onclick="addDept()">新增院系</button>
+      </div>
+      <br><table id="deptTable"><thead><tr><th>ID</th><th>名称</th><th>描述</th><th>操作</th></tr></thead><tbody></tbody></table>
+      <div style="margin-top:14px">
+        <input id="selDeptId" placeholder="查询ID" style="width:140px">
+        <button class="btn plain" onclick="getDeptById()">按ID查询</button>
+      </div>`;
+    refreshDeptTable();
+  }
+  async function refreshDeptTable() {
+    const r = await api('GET', '/api/departments');
+    const list = (r.data || []).filter(x => x && typeof x === 'object');
+    const tbody = document.querySelector('#deptTable tbody');
+    tbody.innerHTML = list.map(d => `<tr>
+      <td>${d.id}</td><td>${d.name||''}</td><td>${d.description||''}</td>
+      <td><button class="btn red sm" onclick="delDept(${d.id})">删除</button></td>
+    </tr>`).join('') || '<tr><td colspan="4">暂无数据</td></tr>';
+  }
+  async function addDept() {
+    const name = document.getElementById('dName').value.trim();
+    const description = document.getElementById('dDesc').value.trim();
+    if (!name) { showOut('院系名称不能为空'); return; }
+    const r = await api('POST', '/api/departments', { name, description });
+    showOut(r);
+    await refreshDeptTable();
+    clearOut();
+  }
+  async function delDept(id) {
+    const r = await api('DELETE', '/api/departments/' + id);
+    showOut(r);
+    await refreshDeptTable();
+  }
+  async function getDeptById() {
+    const id = document.getElementById('selDeptId').value.trim();
+    const r = await api('GET', '/api/departments/' + id);
+    showOut(r);
+  }
+</script>
+<script>
+  // ---------- 专业管理 ----------
+  async function loadMajors() {
+    const b = document.getElementById('pageBody');
+    b.innerHTML = `
+      <div class="form-grid">
+        <input id="mName" placeholder="专业名称">
+        <input id="mDeptId" placeholder="所属院系ID" value="1">
+        <button class="btn green" onclick="addMajor()">新增专业</button>
+        <button class="btn plain" onclick="refreshMajorTable()">刷新列表</button>
+      </div>
+      <br><table id="majorTable"><thead><tr><th>ID</th><th>名称</th><th>院系ID</th><th>院系名</th><th>操作</th></tr></thead><tbody></tbody></table>`;
+    refreshMajorTable();
+  }
+  async function refreshMajorTable() {
+    const r = await api('GET', '/api/majors');
+    const list = (r.data || []).filter(x => x && typeof x === 'object');
+    const tbody = document.querySelector('#majorTable tbody');
+    tbody.innerHTML = list.map(m => `<tr>
+      <td>${m.id}</td><td>${m.name||''}</td><td>${m.departmentId||''}</td><td>${m.departmentName||''}</td>
+      <td><button class="btn red sm" onclick="delMajor(${m.id})">删除</button></td>
+    </tr>`).join('') || '<tr><td colspan="5">暂无数据</td></tr>';
+  }
+  async function addMajor() {
+    const name = document.getElementById('mName').value.trim();
+    const departmentId = document.getElementById('mDeptId').value.trim();
+    if (!name || !departmentId) { showOut('名称和院系ID不能为空'); return; }
+    const r = await api('POST', '/api/majors', { name, departmentId: Number(departmentId) });
+    showOut(r);
+    await refreshMajorTable();
+    clearOut();
+  }
+  async function delMajor(id) {
+    const r = await api('DELETE', '/api/majors/' + id);
+    showOut(r);
+    await refreshMajorTable();
+  }
+
+  // ---------- 权限管理 ----------
+  async function loadPermissions() {
+    const b = document.getElementById('pageBody');
+    b.innerHTML = `
+      <div class="form-grid">
+        <input id="pName" placeholder="权限名称">
+        <input id="pDesc" placeholder="描述">
+        <button class="btn green" onclick="addPerm()">新增权限</button>
+        <button class="btn plain" onclick="refreshPermTable()">刷新列表</button>
+      </div>
+      <br><table id="permTable"><thead><tr><th>ID</th><th>名称</th><th>描述</th><th>操作</th></tr></thead><tbody></tbody></table>`;
+    refreshPermTable();
+  }
+  async function refreshPermTable() {
+    const r = await api('GET', '/api/permissions');
+    const list = (r.data || []).filter(x => x && typeof x === 'object');
+    const tbody = document.querySelector('#permTable tbody');
+    tbody.innerHTML = list.map(p => `<tr>
+      <td>${p.id}</td><td>${p.name||''}</td><td>${p.description||''}</td>
+      <td><button class="btn red sm" onclick="delPerm(${p.id})">删除</button></td>
+    </tr>`).join('') || '<tr><td colspan="4">暂无数据</td></tr>';
+  }
+  async function addPerm() {
+    const name = document.getElementById('pName').value.trim();
+    const description = document.getElementById('pDesc').value.trim();
+    if (!name) { showOut('权限名称不能为空'); return; }
+    const r = await api('POST', '/api/permissions', { name, description });
+    showOut(r);
+    await refreshPermTable();
+    clearOut();
+  }
+  async function delPerm(id) {
+    const r = await api('DELETE', '/api/permissions/' + id);
+    showOut(r);
+    await refreshPermTable();
+  }
+</script>
+<script>
+  // ---------- 成绩模块 ----------
+  async function loadGrade() {
+    const b = document.getElementById('pageBody');
+    b.innerHTML = `
+      <div class="toolbar">
+        <label>学生ID：</label>
+        <input id="gStuId" value="1" style="width:100px">
+        <button class="btn" onclick="queryGrade()">查询该生成绩</button>
+        <button class="btn plain" onclick="viewMyGrades()">我（当前账号）的成绩</button>
+      </div>
+      <div id="gradeOut"></div>
+      <div class="panel" style="margin-top:16px">
+        <h3>录入成绩</h3>
+        <div class="form-grid">
+          <input id="gStudentId" placeholder="学生账号(如 student2)">
+          <input id="gCourseCode" placeholder="课程号(如 CS101)">
+          <input id="gSemester" placeholder="学期">
+          <input id="gScore" placeholder="分数" type="number" step="0.5">
+          <button class="btn green" onclick="submitGrade()">提交成绩</button>
+        </div>
+      </div>`;
+  }
+  async function queryGrade() {
+    const id = document.getElementById('gStuId').value.trim();
+    const r = await api('GET', '/api/score/student/' + id);
+    renderGradeData('gradeOut', r, '学生' + id + ' 的成绩');
+  }
+  async function viewMyGrades() {
+    const r = await api('GET', '/api/grade/view');
+    renderGradeData('gradeOut', r, '我的成绩');
+  }
+  async function submitGrade() {
+    const studentId = document.getElementById('gStudentId').value.trim();
+    const courseCode = document.getElementById('gCourseCode').value.trim();
+    const semester = document.getElementById('gSemester').value.trim();
+    const score = document.getElementById('gScore').value.trim();
+    if (!studentId || !courseCode || score === '') { showOut('请填写完整'); return; }
+    const r = await api('POST', '/api/grade/submit', { studentId, courseCode, semester, score: Number(score) });
+    showOut(r);
+    clearOut();
+  }
+  function renderGradeData(targetId, res, title) {
+    const el = document.getElementById(targetId);
+    const data = res.data;
+    if (!Array.isArray(data) || data.length === 0) {
+      el.innerHTML = '<div class="out">暂无成绩数据</div>';
+      return;
+    }
+    const cols = Object.keys(data[0]);
+    el.innerHTML = '<div class="out"><b>' + title + '</b>\n' + JSON.stringify(data, null, 2) + '</div>';
+  }
+
+  // ---------- 课程申请 ----------
+  async function loadRequests() {
+    const b = document.getElementById('pageBody');
+    b.innerHTML = `
+      <div class="toolbar">
+        <button class="btn" onclick="listPending()">待审申请</button>
+        <button class="btn plain" onclick="listMyRequests()">我的申请(学生1)</button>
+        <button class="btn plain" onclick="refreshReqTable()">刷新</button>
+      </div>
+      <div id="reqTableWrap"></div>
+      <div class="panel" style="margin-top:16px">
+        <h3>提交课程申请</h3>
+        <div class="form-grid">
+          <input id="rCourseId" placeholder="课程ID" value="2">
+          <input id="rStudentId" placeholder="学生ID" value="1">
+          <input id="rReason" placeholder="申请理由">
+          <button class="btn green" onclick="submitRequest()">提交</button>
+        </div>
+      </div>`;
+  }
+  async function listPending() {
+    const r = await api('GET', '/api/course-requests/pending');
+    renderRequests(r.data, '待审课程申请');
+  }
+  async function listMyRequests() {
+    const r = await api('GET', '/api/course-requests/student/1');
+    renderRequests(r.data, '我的申请');
+  }
+  async function refreshReqTable() {
+    listPending();
+  }
+  function renderRequests(arr, title) {
+    const wrap = document.getElementById('reqTableWrap');
+    if (!Array.isArray(arr) || arr.length === 0) { wrap.innerHTML = '<div class="out">' + title + '：暂无数据</div>'; return; }
+    wrap.innerHTML = '<div class="out"><b>' + title + '</b>\n' + JSON.stringify(arr, null, 2) +
+      '</div><div class="toolbar" style="margin-top:10px"><button class="btn green" onclick="reviewReq(1,true)">通过ID=1</button><button class="btn red" onclick="reviewReq(1,false)">拒绝ID=1</button></div>';
+  }
+  async function reviewReq(id, approve) {
+    const r = await api('POST', '/api/course-requests/review/' + id + '?approve=' + approve + '&reviewer=' + encodeURIComponent(USER));
+    showOut(r);
+  }
+  async function submitRequest() {
+    const courseId = document.getElementById('rCourseId').value.trim();
+    const studentId = document.getElementById('rStudentId').value.trim();
+    const reason = document.getElementById('rReason').value.trim();
+    if (!courseId || !studentId) { showOut('课程ID和学生ID不能为空'); return; }
+    const r = await api('POST', '/api/course-requests', {
+      courseId: Number(courseId), studentId: Number(studentId),
+      requestType: 'OPEN_COURSE', reason, statusChangeReason: reason
+    });
+    showOut(r);
+    clearOut();
+  }
+</script>
+<script>
+  // ---------- 教师管理 ----------
+  async function loadTeacher() {
+    const b = document.getElementById('pageBody');
+    b.innerHTML = `
+      <div class="toolbar">
+        <button class="btn" onclick="refreshTeacherTable()">刷新教师列表</button>
+      </div>
+      <div id="teacherOut"></div>
+      <div class="panel" style="margin-top:16px">
+        <h3>添加教师（按规则生成账号）</h3>
+        <div class="form-grid">
+          <input id="tYear" placeholder="年份(如2026)">
+          <input id="tDeptId" placeholder="院系ID" value="1">
+          <input id="tIndex" placeholder="序号">
+          <button class="btn green" onclick="addTeacher()">添加教师</button>
+          <button class="btn orange" onclick="batchTeacher()">批量添加</button>
+        </div>
+      </div>`;
+    refreshTeacherTable();
+  }
+  async function refreshTeacherTable() {
+    const r = await api('GET', '/api/admin/teacher');
+    const data = r.data;
+    const wrap = document.getElementById('teacherOut');
+    if (!Array.isArray(data) || data.length === 0) { wrap.innerHTML = '<div class="out">暂无教师数据</div>'; return; }
+    let html = '<table><thead><tr>';
+    Object.keys(data[0]).forEach(k => html += '<th>' + k + '</th>');
+    html += '</tr></thead><tbody>';
+    data.forEach(x => {
+      html += '<tr>';
+      Object.keys(x).forEach(k => html += '<td>' + (x[k]||'') + '</td>');
+      html += '<td><button class="btn red sm" onclick="delTeacher(\'' + encodeURIComponent(x.account||x.username||'') + '\')">删除</button></td></tr>';
+    });
+    html += '</tbody></table>';
+    wrap.innerHTML = html;
+  }
+  async function delTeacher(accountEnc) {
+    const account = decodeURIComponent(accountEnc);
+    const r = await api('DELETE', '/api/admin/teacher/' + encodeURIComponent(account));
+    showOut(r);
+    await refreshTeacherTable();
+  }
+  async function addTeacher() {
+    const year = document.getElementById('tYear').value.trim();
+    const deptId = document.getElementById('tDeptId').value.trim();
+    const index = document.getElementById('tIndex').value.trim();
+    if (!year || !deptId || !index) { showOut('请填全年份/院系ID/序号'); return; }
+    const r = await api('POST', '/api/admin/teacher/add', { year: Number(year), deptId: Number(deptId), index: Number(index) });
+    showOut(r);
+    await refreshTeacherTable();
+    clearOut();
+  }
+  async function batchTeacher() {
+    const year = document.getElementById('tYear').value.trim();
+    const deptId = document.getElementById('tDeptId').value.trim();
+    const r = await api('POST', '/api/admin/teacher/batch', { year: Number(year), deptId: Number(deptId), count: 2 });
+    showOut(r);
+    await refreshTeacherTable();
+  }
+
+  // ---------- 学生选课 ----------
+  async function loadStudent() {
+    const b = document.getElementById('pageBody');
+    b.innerHTML = `
+      <div class="panel">
+        <h3>选课（当前学生账号：student1）</h3>
+        <div class="form-grid">
+          <input id="sCode" placeholder="课程号(如 CS201)">
+          <input id="sSemester" placeholder="学期" value="2025秋季">
+          <button class="btn green" onclick="doSelect()">选课</button>
+        </div>
+        <p style="font-size:12px;color:#999;margin-top:10px">可选课程号：CS101（Java）、CS201（数据结构）。CS101 学生1已选，选 CS201 可成功。</p>
+      </div>`;
+  }
+  async function doSelect() {
+    const courseCode = document.getElementById('sCode').value.trim();
+    const semester = document.getElementById('sSemester').value.trim();
+    if (!courseCode) { showOut('请输入课程号'); return; }
+    const r = await api('POST', '/api/student/select', { courseCode, semester });
+    showOut(r);
+  }
+
+  // 初始化：若已保存 token 且未过期，直接进入
+  if (TOKEN) { showApp(); }
+</script>
+</body>
+</html>
