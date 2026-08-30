@@ -47,8 +47,8 @@ public class AdminAuthStrategy implements AuthStrategy {
                 throw new CustomException("账号或密码错误");
             }
 
-            // 5. 生成JWT令牌
-            String token = jwtTokenProvider.createToken(username, RoleType.ADMIN);
+            // 5. 生成JWT令牌（携带用户ID，供 @AuthenticationPrincipal JwtUser 注入）
+            String token = jwtTokenProvider.createToken(username, admin.getId(), RoleType.ADMIN);
             log.info("管理员登录成功 - username: {}, token: {}", username, maskToken(token));
 
             return token;
