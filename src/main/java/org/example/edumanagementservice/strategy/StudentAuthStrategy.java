@@ -34,7 +34,7 @@ public class StudentAuthStrategy implements AuthStrategy {
             }
 
             log.info("学生登录成功: {}", username);
-            return jwtTokenProvider.createToken(username, RoleType.STUDENT);
+            return jwtTokenProvider.createToken(username, student.getId(), RoleType.STUDENT);
         } catch (Exception e) {
             log.error("学生登录异常: {}", e.getMessage(), e);
             throw e;

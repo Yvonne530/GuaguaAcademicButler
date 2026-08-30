@@ -34,7 +34,7 @@ public class TeacherAuthStrategy implements AuthStrategy {
             }
 
             log.info("教师登录成功: {}", username);
-            return jwtTokenProvider.createToken(username, RoleType.TEACHER); // 使用枚举
+            return jwtTokenProvider.createToken(username, teacher.getId(), RoleType.TEACHER); // 使用枚举
         } catch (Exception e) {
             log.error("教师登录异常: {}", e.getMessage(), e);
             throw e; // 重新抛出异常以统一处理

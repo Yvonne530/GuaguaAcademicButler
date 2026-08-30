@@ -28,7 +28,10 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         AuthStrategy strategy = authStrategyFactory.getStrategy(request.getUserType());
         String accessToken = strategy.login(request.getUsername(), request.getPassword());
-        String refreshToken = jwtTokenProvider.createRefreshToken(request.getUsername());
+        String refreshToken = jwtTokenProvider.createRefreshToken(
+                request.getUsername(),
+                jwtTokenProvider.getUserIdFromToken(accessToken),
+                jwtTokenProvider.getRoleTypeFromToken(accessToken));
 
         TokenResponse tokenResponse = new TokenResponse();
         tokenResponse.setAccessToken(accessToken);
@@ -49,7 +52,10 @@ public class AuthController {
 
         String username = jwtTokenProvider.getUsernameFromToken(refreshToken);
         RoleType role = RoleType.fromUserType(request.getUserType());
-        String newAccessToken = jwtTokenProvider.createToken(username, role);
+        String newAccessToken = jwtTokenProvider.createToken(
+                username,
+                jwtTokenProvider.getUserIdFromToken(refreshToken),
+                role);
 
         return ResponseUtil.ok("刷新成功", newAccessToken);
     }
