@@ -165,5 +165,11 @@ mvn test
 - Q1：运行时报 Lombok 错误怎么办？ A：请确保 IDE 安装了 Lombok 插件，并在 Settings > Build, Execution, Deployment > Compiler 勾选 Annotation Processors。
 - Q2：Redis 是必需的吗？A：项目使用 Redisson 支持缓存和分布式锁，若 Redis 不可用，可将 Redisson 相关配置暂时注释掉或配置为本地。
 - Q3：数据库初始化 SQL 没有怎么办？A：你可以根据实体类结构手动建表，建议作者提供 init.sql 脚本（可放入 /sql/init.sql）。
-### 未完成 ：接口测试全都500报错
+### 接口测试状态
+接口已修复并通过验证。启动后在浏览器打开 Swagger 页面（http://localhost:8080/swagger-ui/index.html）可直接测试全部接口。先调用 `POST /api/auth/login` 获取 Token：admin/admin123、teacher1/123456、student1/123456；后续请求在 Header 加 `Authorization: Bearer <token>`。业务校验（重复数据、数据不存在、权限不足）会返回 4xx，系统无 500 内部错误。
+
+### 已修复问题
+- JWT Token 携带用户 id，修复 `@AuthenticationPrincipal JwtUser` 无法注入导致接口 500。
+- 全局异常处理器补充处理 `CustomException` / `IllegalArgumentException`（原先落入兜底 500）。
+- `GradeService.setGradeWeights` 补充 `@Transactional`，修复“无事务执行 remove”错误。
 
