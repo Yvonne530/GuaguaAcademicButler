@@ -24,6 +24,21 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(ApiResponse.error(400, message));
     }
 
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<ApiResponse<Void>> handleCustomException(CustomException ex) {
+        int code = ex.getErrorCode();
+        HttpStatus status = HttpStatus.resolve(code);
+        if (status == null) {
+            status = HttpStatus.BAD_REQUEST;
+        }
+        return ResponseEntity.status(status).body(ApiResponse.error(code, ex.getMessage()));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiResponse<Void>> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ResponseEntity.badRequest().body(ApiResponse.error(400, ex.getMessage()));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleOtherException(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

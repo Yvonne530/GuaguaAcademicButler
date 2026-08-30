@@ -12,6 +12,7 @@ import org.example.edumanagementservice.repository.GradeRepository;
 import org.example.edumanagementservice.repository.GradeWeightRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -30,6 +31,7 @@ public class GradeService {
         gradeRepository.save(grade);
     }
 
+    @Transactional
     public void setGradeWeights(Long courseId, Long teacherId, List<GradeWeightDTO> weights) {
         // 1. 验证课程和教师权限
         Course course = courseRepo.findByIdAndTeacherId(courseId, teacherId)

@@ -2,6 +2,7 @@ package org.example.edumanagementservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.edumanagementservice.dto.PermissionDTO;
+import org.example.edumanagementservice.exception.CustomException;
 import org.example.edumanagementservice.model.Course;
 import org.example.edumanagementservice.model.Permission;
 import org.example.edumanagementservice.repository.CourseRepository;
@@ -70,9 +71,9 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public boolean approveCourse(Long courseId, boolean approved) {
         Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new RuntimeException("课程不存在"));
+                .orElseThrow(() -> new CustomException(404, "课程不存在"));
         if ("APPROVED".equals(course.getStatus()) || "REJECTED".equals(course.getStatus())) {
-            throw new RuntimeException("课程已审核");
+            throw new CustomException(400, "课程已审核");
         }
         course.setStatus(approved ? "APPROVED" : "REJECTED");
         courseRepository.save(course);
@@ -83,14 +84,14 @@ public class PermissionServiceImpl implements PermissionService {
     public boolean publishCourse(Long courseId, Long teacherId) {
         // 查找权限记录（此处用 teacherId.toString() 作为权限名）
         Permission permission = permissionRepository.findByName(teacherId.toString())
-                .orElseThrow(() -> new RuntimeException("教师权限未配置"));
+                .orElseThrow(() -> new CustomException(403, "教师权限未配置"));
 
         if (!Boolean.parseBoolean(permission.getDescription())) {
-            throw new RuntimeException("教师无权发布课程");
+            throw new CustomException(403, "教师无权发布课程");
         }
 
         Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new RuntimeException("课程不存在"));
+                .orElseThrow(() -> new CustomException(404, "课程不存在"));
         course.setStatus("PUBLISHED");
         courseRepository.save(course);
 
