@@ -37,3 +37,4 @@ app.log
 app_run.log
 build_out.txt
 .waylog/
+META-INF/
