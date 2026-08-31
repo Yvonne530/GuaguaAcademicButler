@@ -1,0 +1,12 @@
+﻿	at org.example.edumanagementservice.EduManagementApplication.main(EduManagementApplication.java:12) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:91) ~[edu-management-service-1.0.0.jar:1.0.0]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:53) ~[edu-management-service-1.0.0.jar:1.0.0]
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:58) ~[edu-management-service-1.0.0.jar:1.0.0]
+Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 0
+	at org.springframework.asm.ClassReader.readShort(ClassReader.java:3630) ~[spring-core-6.1.1.jar!/:6.1.1]
+	at org.springframework.asm.ClassReader.<init>(ClassReader.java:197) ~[spring-core-6.1.1.jar!/:6.1.1]
+	at org.springframework.asm.ClassReader.<init>(ClassReader.java:180) ~[spring-core-6.1.1.jar!/:6.1.1]

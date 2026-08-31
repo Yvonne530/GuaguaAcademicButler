@@ -46,15 +46,18 @@ public class AuthController {
             @RequestHeader("Authorization") String refreshToken,
             @RequestBody RefreshTokenRequest request
     ) {
-        if (!jwtTokenProvider.validateToken(refreshToken)) {
+        String token = refreshToken.startsWith("Bearer ")
+                ? refreshToken.substring(7).trim()
+                : refreshToken.trim();
+        if (!jwtTokenProvider.validateToken(token)) {
             throw new CustomException("无效的 Refresh Token");
         }
 
-        String username = jwtTokenProvider.getUsernameFromToken(refreshToken);
+        String username = jwtTokenProvider.getUsernameFromToken(token);
         RoleType role = RoleType.fromUserType(request.getUserType());
         String newAccessToken = jwtTokenProvider.createToken(
                 username,
-                jwtTokenProvider.getUserIdFromToken(refreshToken),
+                jwtTokenProvider.getUserIdFromToken(token),
                 role);
 
         return ResponseUtil.ok("刷新成功", newAccessToken);

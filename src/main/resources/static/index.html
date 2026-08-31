@@ -103,15 +103,17 @@
 </div>
 <script>
   let TOKEN = localStorage.getItem('edu_token') || '';
+  let REFRESH = localStorage.getItem('edu_refresh') || '';
   let ROLE = localStorage.getItem('edu_role') || '';
   let USER = localStorage.getItem('edu_user') || '';
 
   // 通用 fetch 封装：自动带 token，解析 {code,message,data} 或直接返回值
-  async function api(method, url, body) {
-    const opt = { method, headers: { 'Accept': 'application/json' } };
-    if (TOKEN) opt.headers['Authorization'] = 'Bearer ' + TOKEN;
+  // headersOverride 可覆盖请求头（如登录/刷新时更换 Authorization）
+  async function api(method, url, body, headersOverride) {
+    const opt = { method, headers: { 'Accept': 'application/json', ...(headersOverride || {}) } };
+    if (TOKEN && !(headersOverride && 'Authorization' in headersOverride)) opt.headers['Authorization'] = 'Bearer ' + TOKEN;
     if (body !== undefined) {
-      opt.headers['Content-Type'] = 'application/json';
+      if (!opt.headers['Content-Type']) opt.headers['Content-Type'] = 'application/json';
       opt.body = typeof body === 'string' ? body : JSON.stringify(body);
     }
     const resp = await fetch(url, opt);
@@ -132,9 +134,11 @@
       const res = await api('POST', '/api/auth/login', { username, password, userType });
       if (res.code === 200 && res.data && res.data.accessToken) {
         TOKEN = res.data.accessToken;
+        REFRESH = res.data.refreshToken || REFRESH;
         USER = username;
         ROLE = userType;
         localStorage.setItem('edu_token', TOKEN);
+        localStorage.setItem('edu_refresh', REFRESH);
         localStorage.setItem('edu_role', ROLE);
         localStorage.setItem('edu_user', USER);
         msg.classList.add('ok');
@@ -169,6 +173,7 @@
 
   const TABS = [
     { id: 'home', name: '🏠 概览' },
+    { id: 'apitest', name: '🧪 接口测试中心' },
     { id: 'departments', name: '🏢 院系管理' },
     { id: 'majors', name: '🎓 专业管理' },
     { id: 'permissions', name: '🔑 权限管理' },
@@ -199,6 +204,7 @@
     else if (id === 'requests') loadRequests();
     else if (id === 'teacher') loadTeacher();
     else if (id === 'student') loadStudent();
+    else if (id === 'apitest') loadApiTest();
     else loadHome();
   }
 
@@ -556,3 +562,151 @@
 </script>
 </body>
 </html>
+<script>
+  // ===================== 接口测试中心 =====================
+  const ALL_API = [
+    { g: '🔐 认证 Auth', items: [
+      { n:'POST /api/auth/login', m:'POST', u:'/api/auth/login', noAuth:true,
+        b:{username:'admin', password:'admin123', userType:'admin'} },
+      { n:'POST /api/auth/refresh', m:'POST', u:'/api/auth/refresh', useRefresh:true,
+        b:{userType:'admin'} },
+    ]},
+    { g: '📊 成绩 Score / Grade', items: [
+      { n:'GET /api/score/student/{id}', m:'GET', u:'/api/score/student/{id}', path:{id:1} },
+      { n:'GET /api/grade/view', m:'GET', u:'/api/grade/view' },
+      { n:'POST /api/grade/submit', m:'POST', u:'/api/grade/submit',
+        b:{studentId:'student2', courseCode:'CS101', semester:'S-2025', score:90} },
+      { n:'POST /api/grade/weights/{courseId}', m:'POST', u:'/api/grade/weights/{courseId}', path:{courseId:1},
+        b:[{assessmentType:'FINAL', weight:100, itemName:'final'}] },
+    ]},
+    { g: '🏢 院系 Departments', items: [
+      { n:'GET /api/departments', m:'GET', u:'/api/departments' },
+      { n:'GET /api/departments/{id}', m:'GET', u:'/api/departments/{id}', path:{id:1} },
+      { n:'POST /api/departments', m:'POST', u:'/api/departments', b:{name:'新院系', description:'演示新增'} },
+      { n:'PUT /api/departments/{id}', m:'PUT', u:'/api/departments/{id}', path:{id:1}, b:{name:'已更新院系', description:'更新演示'} },
+      { n:'DELETE /api/departments/{id}', m:'DELETE', u:'/api/departments/{id}', path:{id:999} },
+    ]},
+    { g: '🎓 专业 Majors', items: [
+      { n:'GET /api/majors', m:'GET', u:'/api/majors' },
+      { n:'GET /api/majors/{id}', m:'GET', u:'/api/majors/{id}', path:{id:1} },
+      { n:'GET /api/majors/department/{id}', m:'GET', u:'/api/majors/department/{id}', path:{id:1} },
+      { n:'POST /api/majors', m:'POST', u:'/api/majors', b:{name:'新专业', departmentId:1} },
+      { n:'PUT /api/majors/{id}', m:'PUT', u:'/api/majors/{id}', path:{id:2}, b:{name:'已更新专业', departmentId:1} },
+      { n:'DELETE /api/majors/{id}', m:'DELETE', u:'/api/majors/{id}', path:{id:999} },
+    ]},
+    { g: '🔑 权限 Permissions', items: [
+      { n:'GET /api/permissions', m:'GET', u:'/api/permissions' },
+      { n:'GET /api/permissions/{id}', m:'GET', u:'/api/permissions/{id}', path:{id:1} },
+      { n:'POST /api/permissions', m:'POST', u:'/api/permissions', b:{name:'查看演示', description:'演示'} },
+      { n:'PUT /api/permissions/{id}', m:'PUT', u:'/api/permissions/{id}', path:{id:1}, b:{name:'VIEW_COURSE', description:'更新演示'} },
+      { n:'DELETE /api/permissions/{id}', m:'DELETE', u:'/api/permissions/{id}', path:{id:999} },
+      { n:'POST /api/permissions/assign', m:'POST', u:'/api/permissions/assign?teacherId=1&canPublish=true' },
+      { n:'POST /api/permissions/course/approve', m:'POST', u:'/api/permissions/course/approve?courseId=1&approved=true' },
+      { n:'POST /api/permissions/course/publish', m:'POST', u:'/api/permissions/course/publish?courseId=1&teacherId=1' },
+    ]},
+    { g: '📝 课程申请 Course Requests', items: [
+      { n:'POST /api/course-requests', m:'POST', u:'/api/course-requests',
+        b:{courseId:2, studentId:1, requestType:'OPEN_COURSE', reason:'演示', statusChangeReason:'演示'} },
+      { n:'POST /api/course-requests/status-change', m:'POST', u:'/api/course-requests/status-change',
+        b:{courseId:1, statusChangeReason:'状态变更演示'} },
+      { n:'POST /api/course-requests/review/{id}', m:'POST', u:'/api/course-requests/review/{id}?approve=true&reviewer=admin', path:{id:1} },
+      { n:'GET /api/course-requests/student/{id}', m:'GET', u:'/api/course-requests/student/{id}', path:{id:1} },
+      { n:'GET /api/course-requests/pending', m:'GET', u:'/api/course-requests/pending' },
+    ]},
+    { g: '👤 行政后台 Admin', items: [
+      { n:'PUT /admin/course-requests/{id}/approve', m:'PUT', u:'/admin/course-requests/{id}/approve?approved=true', path:{id:1} },
+      { n:'GET /api/admin/teacher', m:'GET', u:'/api/admin/teacher' },
+      { n:'POST /api/admin/teacher/add', m:'POST', u:'/api/admin/teacher/add', b:{year:2026, deptId:1, index:88} },
+      { n:'POST /api/admin/teacher/batch', m:'POST', u:'/api/admin/teacher/batch', b:{year:2026, deptId:1, count:1} },
+      { n:'DELETE /api/admin/teacher/{account}', m:'DELETE', u:'/api/admin/teacher/{account}', path:{account:'260010088'} },
+      { n:'GET /api/teacher/course/publish', m:'GET', tip:'(POST)', realU:'/api/teacher/course/publish?courseId=1&teacherId=1', usePost:true },
+    ]},
+    { g: '🎓 选课 Student', items: [
+      { n:'POST /api/student/select', m:'POST', u:'/api/student/select', b:{courseCode:'CS201', semester:'2025秋季'} },
+    ]},
+  ];
+
+  function loadApiTest() {
+    const page = document.getElementById('pageContent');
+    page.innerHTML = '<div class="panel"><h3>🧪 接口测试中心</h3>' +
+      '<p style="color:#666;margin-bottom:14px">下方列出当前后端实际注册的接口，点击 <b>调用</b> 按钮即可直接请求（自动携带登录 Token）。路径参数可在输入框修改后点“应用”。</p>' +
+      '<div id="apitestList"></div></div>';
+    renderApiGroups();
+  }
+
+  function renderApiGroups() {
+    const wrap = document.getElementById('apitestList');
+    let globalIdx = 0;
+    wrap.innerHTML = ALL_API.map(g => {
+      const blocks = g.items.map(it => {
+        const myIdx = globalIdx++;
+        return itBlock(it, myIdx);
+      }).join('');
+      return `<div style="margin-bottom:20px">
+        <h4 style="margin-bottom:8px;color:#1a73e8">${g.g}</h4>${blocks}
+      </div>`;
+    }).join('');
+  }
+
+  function getItemByIdx(idx) {
+    let c = -1;
+    for (const g of ALL_API) {
+      for (const it of g.items) {
+        c++;
+        if (c === idx) return it;
+      }
+    }
+    return null;
+  }
+
+  function itBlock(it, idx) {
+    let pathForm = '';
+    if (it.path) {
+      pathForm = '<div style="margin-top:6px"><span style="font-size:12px;color:#666">路径参数：</span>' +
+        Object.keys(it.path).map(k => `<input data-apik="${k}${idx}" value="${it.path[k]}" style="width:90px;margin-right:6px">`).join('') +
+        '</div>';
+    }
+    const bodyStr = (it.b !== undefined && !it.path) ? '<div class="out" style="margin-top:6px;max-height:80px"><b>Body：</b>' + JSON.stringify(it.b, null, 2) + '</div>' : '';
+    return `
+      <div style="border:1px solid #e5e5e5;border-radius:6px;padding:10px 12px;margin-bottom:10px;background:#fbfcfe">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="badge ${it.m==='GET'?'green':it.m==='POST'?'orange':'gray'}">${it.m}</span>
+          <b style="font-size:13px;flex:1">${it.n}</b>
+          <button class="btn orange sm" onclick="runApiTest('${idx}')">调用</button>
+        </div>
+        <div style="margin-top:8px;font-size:12px;color:#666">Path：<code>${it.realU || it.u}${it.tip ? ' ' + it.tip : ''}</code></div>
+        ${pathForm}
+        ${bodyStr}
+        <div id="apidemo_res_${idx}"></div>
+      </div>`;
+  }
+
+  function runApiTest(idx) {
+    const it = getItemByIdx(idx);
+    if (!it) return;
+    let url = it.realU || it.u;
+    if (it.path) {
+      Object.keys(it.path).forEach(k => {
+        const inp = document.querySelector(`[data-apik="${k}${idx}"]`);
+        const val = inp ? inp.value : it.path[k];
+        url = url.replace('{' + k + '}', val);
+      });
+    }
+    // headersOverride
+    let ho = null;
+    if (it.useRefresh) {
+      ho = { Authorization: REFRESH ? 'Bearer ' + REFRESH : '' };
+    } else if (!it.noAuth) {
+      // 默认带 token，无需覆盖
+    }
+    // noAuth 时禁止加 token（api() 中判断 undefined 才附加 token）
+    if (it.noAuth) ho = { Authorization: undefined };
+    const method = it.usePost ? 'POST' : it.m;
+    api(method, url, it.b, ho).then(res => {
+      const box = document.getElementById('apidemo_res_' + idx);
+      box.innerHTML = '<div class="out" style="margin-top:8px"><b>HTTP码/业务码：</b>' +
+        (res.code) + '<br>' + JSON.stringify(res, null, 2) + '</div>';
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+</script>
