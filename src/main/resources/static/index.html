@@ -275,11 +275,15 @@
   async function addDept() {
     const name = document.getElementById('dName').value.trim();
     const description = document.getElementById('dDesc').value.trim();
-    if (!name) { showOut('院系名称不能为空'); return; }
-    const r = await api('POST', '/api/departments', { name, description });
-    showOut(r);
-    await refreshDeptTable();
-    clearOut();
+    if (!name) { showOut('⚠️ 院系名称不能为空'); return; }
+    try {
+      const r = await api('POST', '/api/departments', { name, description });
+      showOut((r.code === 200 || r.code === 201 ? '✅ ' : '❌ ') + (r.message || JSON.stringify(r)));
+      await refreshDeptTable();
+      if (r.code === 200 || r.code === 201) document.getElementById('dName').value = '';
+    } catch (e) {
+      showOut('❌ 请求异常：' + e.message);
+    }
   }
   async function delDept(id) {
     const r = await api('DELETE', '/api/departments/' + id);
@@ -318,11 +322,15 @@
   async function addMajor() {
     const name = document.getElementById('mName').value.trim();
     const departmentId = document.getElementById('mDeptId').value.trim();
-    if (!name || !departmentId) { showOut('名称和院系ID不能为空'); return; }
-    const r = await api('POST', '/api/majors', { name, departmentId: Number(departmentId) });
-    showOut(r);
-    await refreshMajorTable();
-    clearOut();
+    if (!name || !departmentId) { showOut('⚠️ 名称和院系ID不能为空'); return; }
+    try {
+      const r = await api('POST', '/api/majors', { name, departmentId: Number(departmentId) });
+      showOut((r.code === 200 || r.code === 201 ? '✅ ' : '❌ ') + (r.message || JSON.stringify(r)));
+      await refreshMajorTable();
+      if (r.code === 200 || r.code === 201) document.getElementById('mName').value = '';
+    } catch (e) {
+      showOut('❌ 请求异常：' + e.message);
+    }
   }
   async function delMajor(id) {
     const r = await api('DELETE', '/api/majors/' + id);
@@ -355,11 +363,15 @@
   async function addPerm() {
     const name = document.getElementById('pName').value.trim();
     const description = document.getElementById('pDesc').value.trim();
-    if (!name) { showOut('权限名称不能为空'); return; }
-    const r = await api('POST', '/api/permissions', { name, description });
-    showOut(r);
-    await refreshPermTable();
-    clearOut();
+    if (!name) { showOut('⚠️ 权限名称不能为空'); return; }
+    try {
+      const r = await api('POST', '/api/permissions', { name, description });
+      showOut((r.code === 200 || r.code === 201 ? '✅ ' : '❌ ') + (r.message || JSON.stringify(r)));
+      await refreshPermTable();
+      if (r.code === 200 || r.code === 201) document.getElementById('pName').value = '';
+    } catch (e) {
+      showOut('❌ 请求异常：' + e.message);
+    }
   }
   async function delPerm(id) {
     const r = await api('DELETE', '/api/permissions/' + id);
