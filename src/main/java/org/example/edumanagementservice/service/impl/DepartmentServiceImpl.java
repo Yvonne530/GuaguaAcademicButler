@@ -7,6 +7,8 @@ import org.example.edumanagementservice.model.Department;
 import org.example.edumanagementservice.repository.DepartmentRepository;
 import org.example.edumanagementservice.service.DepartmentService;
 import org.springframework.beans.BeanUtils;
+import org.example.edumanagementservice.repository.MajorRepository;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,10 @@ import java.util.stream.Collectors;
 public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository departmentRepository;
+    private final MajorRepository majorRepository;
 
     @Override
+    @CacheEvict(cacheNames = "departments", allEntries = true)
     public DepartmentDTO createDepartment(DepartmentDTO dto) {
         if (departmentRepository.existsByName(dto.getName())) {
             throw new CustomException("院系名称已存在");
@@ -33,6 +37,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "departments", allEntries = true)
     public DepartmentDTO updateDepartment(Long id, DepartmentDTO dto) {
         Department department = departmentRepository.findById(id)
                 .orElseThrow(() -> new CustomException("未找到对应院系"));
@@ -42,9 +47,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "departments", allEntries = true)
     public void deleteDepartment(Long id) {
         if (!departmentRepository.existsById(id)) {
             throw new CustomException("院系不存在");
+        }
+        long majorCount = majorRepository.findByDepartmentId(id).size();
+        if (majorCount > 0) {
+            throw new CustomException("该院系下还有 " + majorCount + " 个专业，无法删除，请先删除或迁移这些专业");
         }
         departmentRepository.deleteById(id);
     }

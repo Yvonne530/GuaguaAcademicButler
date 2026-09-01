@@ -9,6 +9,7 @@ import org.example.edumanagementservice.repository.DepartmentRepository;
 import org.example.edumanagementservice.repository.MajorRepository;
 import org.example.edumanagementservice.service.MajorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class MajorServiceImpl implements MajorService {
     private final DepartmentRepository departmentRepository;
 
     @Override
+    @CacheEvict(cacheNames = "majors", allEntries = true)
     public MajorDTO createMajor(MajorDTO dto) {
         if (majorRepository.existsByNameAndDepartmentId(dto.getName(), dto.getDepartmentId())) {
             throw new CustomException("该院系下已存在同名专业");
@@ -41,6 +43,7 @@ public class MajorServiceImpl implements MajorService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "majors", allEntries = true)
     public MajorDTO updateMajor(Long id, MajorDTO dto) {
         Major major = majorRepository.findById(id)
                 .orElseThrow(() -> new CustomException("未找到对应专业"));
@@ -56,6 +59,7 @@ public class MajorServiceImpl implements MajorService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "majors", allEntries = true)
     public void deleteMajor(Long id) {
         if (!majorRepository.existsById(id)) {
             throw new CustomException("专业不存在");
